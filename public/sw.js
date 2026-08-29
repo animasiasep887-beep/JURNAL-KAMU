@@ -1,17 +1,7 @@
-// Service Worker for Personal Life OS (PWA & Offline Cache)
-const CACHE_NAME = 'lifeos-pwa-v1';
-const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/manifest.json'
-];
+// Service Worker for Personal Life OS (Network First Strategy & PWA Push)
+const CACHE_NAME = 'lifeos-pwa-v2';
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
-    })
-  );
   self.skipWaiting();
 });
 
@@ -31,14 +21,26 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Pass through dynamic APIs like /api/db or Vite dev server
-  if (event.request.url.includes('/api/') || event.request.url.includes('chrome-extension')) {
+  // Pass through dynamic APIs or non-GET requests
+  if (
+    event.request.method !== 'GET' ||
+    event.request.url.includes('/api/') ||
+    event.request.url.includes('chrome-extension')
+  ) {
     return;
   }
+
+  // Network-First with Cache Fallback
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request).catch(() => caches.match('/'));
-    })
+    fetch(event.request)
+      .then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const clone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return networkResponse;
+      })
+      .catch(() => caches.match(event.request).then((res) => res || caches.match('/')))
   );
 });
 
