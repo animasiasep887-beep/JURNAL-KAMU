@@ -1,0 +1,24 @@
+{
+  "name": "Personal Life OS & AI Partner",
+  "short_name": "LifeOS",
+  "description": "Executive Personal Operating System for Financials, Mental Health Journaling, Fitness & Multimodal AI Bot.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#020617",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "/pwa-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/pwa-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

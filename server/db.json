@@ -1,0 +1,706 @@
+{
+  "bindings": {
+    "6356373334": {
+      "userId": "user-ad990x",
+      "code": "AD990X",
+      "chatId": "6356373334",
+      "username": "reudysakti",
+      "connectedAt": "2026-08-28T12:33:12.707Z"
+    }
+  },
+  "codes": {
+    "A7K92P": "user-bintang",
+    "HJYNCJ": "user-hjyncj",
+    "AD990X": "user-ad990x"
+  },
+  "geminiApiKey": "AQ.Ab8RN6KWdDitZ8MQCqGo5Yfu9i1EzFa7gEjzhpL34FLaOtM2KA",
+  "journals": [
+    {
+      "id": "j-tg-1787921251905",
+      "userId": "user-ad990x",
+      "code": "AD990X",
+      "date": "2026-08-28",
+      "title": "Hari ini lagi galau banget",
+      "content": "saya hari ini lagi galau banget",
+      "mood": 2,
+      "energyLevel": 5,
+      "highlightText": "Merasa galau dan butuh ruang untuk menenangkan pikiran.",
+      "gratitudeText": "Bisa jujur mengekspresikan perasaan lewat jurnaling.",
+      "learnedText": "Galau adalah emosi yang valid. Memberi ruang bagi diri sendiri untuk merasakannya membantu proses penerimaan.",
+      "problemsText": "Pikiran sedang gundah/galau.",
+      "solutionsText": "Tarik napas dalam-dalam, dengarkan musik yang menenangkan, dan jangan pendam perasaan sendirian. AI Partner selalu ada untukmu!",
+      "tags": [
+        "#telegram",
+        "#realtime",
+        "#jurnal",
+        "#refleksi"
+      ],
+      "createdAt": "2026-08-28T12:47:31.905Z",
+      "updatedAt": "2026-08-28T12:47:31.905Z"
+    },
+    {
+      "id": "j-tg-1787921069209",
+      "userId": "user-ad990x",
+      "code": "AD990X",
+      "date": "2026-08-28",
+      "title": "Saya gym hari ini",
+      "content": "saya gym hari ini",
+      "mood": 5,
+      "energyLevel": 9,
+      "highlightText": "Menuntaskan sesi latihan gym dan menjaga stamina.",
+      "gratitudeText": "Tubuh mampu bergerak aktif dan tetap bugar.",
+      "learnedText": "Olahraga melepaskan hormon endorfin yang menjaga mood tetap positif.",
+      "problemsText": "",
+      "solutionsText": "Cukupi hidrasi air putih dan konsumsi makanan bernutrisi untuk recovery.",
+      "tags": [
+        "#telegram",
+        "#realtime",
+        "#jurnal",
+        "#gym"
+      ],
+      "createdAt": "2026-08-28T12:44:29.209Z",
+      "updatedAt": "2026-08-28T12:44:29.209Z"
+    },
+    {
+      "id": "j-tg-1787920980000",
+      "userId": "user-ad990x",
+      "code": "AD990X",
+      "date": "2026-08-28",
+      "title": "Mau main tapi ketiduran",
+      "content": "Hari ini mau main tapi malah ketiduran, jadi ditinggal deh sama temen-temen. Rasanya agak bete dan nyesel, tapi sadar juga badan emang lagi butuh istirahat.",
+      "mood": 3,
+      "energyLevel": 6,
+      "highlightText": "Ketiduran dan sadar badan emang lagi butuh istirahat.",
+      "gratitudeText": "Tubuh bisa mendapatkan istirahat yang sangat dibutuhkan setelah beraktivitas.",
+      "learnedText": "Mendengarkan sinyal kelelahan tubuh adalah bentuk self-care yang sehat, bukan kegagalan.",
+      "problemsText": "Rencana hangout terlewat karena kelelahan yang menumpuk.",
+      "solutionsText": "Kabari teman dengan santai, jadwalkan ulang agenda main, dan atur waktu tidur/alarm lebih teratur.",
+      "tags": [
+        "#telegram",
+        "#realtime",
+        "#jurnal",
+        "#istirahat"
+      ],
+      "createdAt": "2026-08-28T12:43:00.000Z",
+      "updatedAt": "2026-08-28T12:43:00.000Z"
+    },
+    {
+      "id": "j-tg-1787736800000",
+      "userId": "user-hjyncj",
+      "date": "2026-08-26",
+      "title": "Saya Hari Ini Laper",
+      "content": "saya ingin jurnaling saya hari ini laper, tapi tetap semangat belajar dan mencatat semua aktivitas harian di Personal Life OS.",
+      "mood": 4,
+      "energyLevel": 8,
+      "highlightText": "Saya hari ini laper dan tetap semangat beraktivitas.",
+      "gratitudeText": "Bersyukur masih bisa beraktivitas dan belajar hal baru.",
+      "learnedText": "Pentingnya menjaga asupan energi dan hidrasi saat beraktivitas.",
+      "problemsText": "Merasa lapar di sela-sela aktivitas",
+      "solutionsText": "Mencari makanan bergizi dan istirahat sejenak",
+      "tags": [
+        "#telegram",
+        "#realtime",
+        "#jurnal"
+      ],
+      "createdAt": "2026-08-26T09:10:00.000Z",
+      "updatedAt": "2026-08-26T09:10:00.000Z"
+    },
+    {
+      "id": "j-tg-1787736800001",
+      "userId": "user-bintang",
+      "date": "2026-08-26",
+      "title": "Saya Hari Ini Laper",
+      "content": "saya ingin jurnaling saya hari ini laper, tapi tetap semangat belajar dan mencatat semua aktivitas harian di Personal Life OS.",
+      "mood": 4,
+      "energyLevel": 8,
+      "highlightText": "Saya hari ini laper dan tetap semangat beraktivitas.",
+      "gratitudeText": "Bersyukur masih bisa beraktivitas dan belajar hal baru.",
+      "learnedText": "Pentingnya menjaga asupan energi dan hidrasi saat beraktivitas.",
+      "problemsText": "Merasa lapar di sela-sela aktivitas",
+      "solutionsText": "Mencari makanan bergizi dan istirahat sejenak",
+      "tags": [
+        "#telegram",
+        "#realtime",
+        "#jurnal"
+      ],
+      "createdAt": "2026-08-26T09:10:00.000Z",
+      "updatedAt": "2026-08-26T09:10:00.000Z"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "tx-tg-1787925885023",
+      "userId": "user-ad990x",
+      "code": "AD990X",
+      "type": "expense",
+      "amount": 25000,
+      "category": "Transportasi",
+      "description": "Hari ini saya ngopi dan bensin",
+      "sourceAccountId": "acc-1",
+      "paymentMethod": "Cash",
+      "date": "2026-08-28",
+      "time": "21:04:45",
+      "timestamp": "2026-08-28T14:04:45.023Z",
+      "tags": [
+        "#telegram",
+        "#realtime"
+      ],
+      "createdAt": "2026-08-28T14:04:45.023Z",
+      "updatedAt": "2026-08-28T14:04:45.023Z"
+    },
+    {
+      "id": "tx-tg-1787852502367",
+      "userId": "user-bintang",
+      "code": "A7K92P",
+      "type": "income",
+      "amount": 1000,
+      "category": "Pemasukan",
+      "description": "Data saya berikan 1 per aya keuangan dulu abisitu dll",
+      "sourceAccountId": "acc-2",
+      "paymentMethod": "Cash",
+      "date": "2026-08-27",
+      "time": "00:41:42",
+      "timestamp": "2026-08-27T17:41:42.367Z",
+      "tags": [
+        "#telegram",
+        "#realtime"
+      ],
+      "createdAt": "2026-08-27T17:41:42.367Z",
+      "updatedAt": "2026-08-27T17:41:42.367Z"
+    },
+    {
+      "id": "tx-tg-1787728542805",
+      "userId": "user-bintang",
+      "type": "expense",
+      "amount": 10000,
+      "category": "Makanan & Minuman",
+      "description": "SAYA  ROTI",
+      "sourceAccountId": "acc-1",
+      "paymentMethod": "Cash",
+      "date": "2026-08-26",
+      "time": "14:15:42",
+      "timestamp": "2026-08-26T07:15:42.805Z",
+      "tags": [
+        "#telegram",
+        "#realtime"
+      ],
+      "createdAt": "2026-08-26T07:15:42.805Z",
+      "updatedAt": "2026-08-26T07:15:42.805Z"
+    },
+    {
+      "id": "tx-tg-1787728536989",
+      "userId": "user-bintang",
+      "type": "expense",
+      "amount": 22000,
+      "category": "Makanan & Minuman",
+      "description": "SAYA   KOPI 2",
+      "sourceAccountId": "acc-1",
+      "paymentMethod": "Cash",
+      "date": "2026-08-26",
+      "time": "14:15:36",
+      "timestamp": "2026-08-26T07:15:36.989Z",
+      "tags": [
+        "#telegram",
+        "#realtime"
+      ],
+      "createdAt": "2026-08-26T07:15:36.989Z",
+      "updatedAt": "2026-08-26T07:15:36.989Z"
+    },
+    {
+      "id": "tx-tg-1787728522622",
+      "userId": "user-bintang",
+      "type": "expense",
+      "amount": 46000,
+      "category": "Makanan & Minuman",
+      "description": "SAYA  MAKAN  MAKAN KFC",
+      "sourceAccountId": "acc-1",
+      "paymentMethod": "Cash",
+      "date": "2026-08-26",
+      "time": "14:15:22",
+      "timestamp": "2026-08-26T07:15:22.622Z",
+      "tags": [
+        "#telegram",
+        "#realtime"
+      ],
+      "createdAt": "2026-08-26T07:15:22.622Z",
+      "updatedAt": "2026-08-26T07:15:22.622Z"
+    },
+    {
+      "id": "tx-tg-1787714071095",
+      "userId": "user-bintang",
+      "type": "income",
+      "amount": 140000,
+      "category": "Pemasukan",
+      "description": "Saya  dari jualan telur 94",
+      "sourceAccountId": "acc-2",
+      "paymentMethod": "Cash",
+      "date": "2026-08-26",
+      "time": "10:14:31",
+      "timestamp": "2026-08-26T03:14:31.095Z",
+      "tags": [
+        "#telegram",
+        "#realtime"
+      ],
+      "createdAt": "2026-08-26T03:14:31.095Z",
+      "updatedAt": "2026-08-26T03:14:31.095Z"
+    },
+    {
+      "id": "tx-tg-1787714030140",
+      "userId": "user-bintang",
+      "type": "expense",
+      "amount": 10000,
+      "category": "Makanan & Minuman",
+      "description": "Pengeluaran  makan hari ini \ndan esteh",
+      "sourceAccountId": "acc-1",
+      "paymentMethod": "Cash",
+      "date": "2026-08-26",
+      "time": "10:13:50",
+      "timestamp": "2026-08-26T03:13:50.140Z",
+      "tags": [
+        "#telegram",
+        "#realtime"
+      ],
+      "createdAt": "2026-08-26T03:13:50.140Z",
+      "updatedAt": "2026-08-26T03:13:50.140Z"
+    }
+  ],
+  "userSummaries": {
+    "AD990X": {
+      "userId": "user-admin",
+      "code": "AD990X",
+      "name": "Admin System",
+      "totalBalance": 0,
+      "accounts": [],
+      "todaySpent": 0,
+      "todayTasksCount": 1,
+      "completedTasksCount": 1,
+      "tasks": [
+        {
+          "title": "Test Task",
+          "status": "done"
+        }
+      ],
+      "goals": [],
+      "habits": [],
+      "recentWorkouts": [],
+      "recentJournals": [
+        {
+          "date": "2026-08-29",
+          "title": "HAI",
+          "mood": 2,
+          "highlight": "HAIIII"
+        },
+        {
+          "date": "2026-08-28",
+          "title": "Hari ini lagi galau banget",
+          "mood": 2,
+          "highlight": "Merasa galau dan butuh ruang untuk menenangkan pikiran."
+        },
+        {
+          "date": "2026-08-28",
+          "title": "Saya gym hari ini",
+          "mood": 5,
+          "highlight": "Menuntaskan sesi latihan gym dan menjaga stamina."
+        },
+        {
+          "date": "2026-08-28",
+          "title": "Mau main tapi ketiduran",
+          "mood": 3,
+          "highlight": "Ketiduran dan sadar badan emang lagi butuh istirahat."
+        }
+      ]
+    },
+    "user-admin": {
+      "userId": "user-admin",
+      "code": "AD990X",
+      "name": "Admin System",
+      "totalBalance": 0,
+      "accounts": [],
+      "todaySpent": 0,
+      "todayTasksCount": 1,
+      "completedTasksCount": 1,
+      "tasks": [
+        {
+          "title": "Test Task",
+          "status": "done"
+        }
+      ],
+      "goals": [],
+      "habits": [],
+      "recentWorkouts": [],
+      "recentJournals": [
+        {
+          "date": "2026-08-29",
+          "title": "HAI",
+          "mood": 2,
+          "highlight": "HAIIII"
+        },
+        {
+          "date": "2026-08-28",
+          "title": "Hari ini lagi galau banget",
+          "mood": 2,
+          "highlight": "Merasa galau dan butuh ruang untuk menenangkan pikiran."
+        },
+        {
+          "date": "2026-08-28",
+          "title": "Saya gym hari ini",
+          "mood": 5,
+          "highlight": "Menuntaskan sesi latihan gym dan menjaga stamina."
+        },
+        {
+          "date": "2026-08-28",
+          "title": "Mau main tapi ketiduran",
+          "mood": 3,
+          "highlight": "Ketiduran dan sadar badan emang lagi butuh istirahat."
+        }
+      ]
+    },
+    "A7K92P": {
+      "userId": "user-bintang",
+      "code": "A7K92P",
+      "name": "User",
+      "totalBalance": 40148000,
+      "accounts": [
+        {
+          "name": "Dompet Cash",
+          "balance": 486000
+        },
+        {
+          "name": "Bank BCA Utama",
+          "balance": 5482000
+        },
+        {
+          "name": "Bank Mandiri Bisnis",
+          "balance": 3400000
+        },
+        {
+          "name": "GoPay & E-Wallet",
+          "balance": 280000
+        },
+        {
+          "name": "Tabungan Masa Depan",
+          "balance": 18500000
+        },
+        {
+          "name": "Dana Investasi Reksadana",
+          "balance": 12000000
+        }
+      ],
+      "todaySpent": 0,
+      "todayTasksCount": 4,
+      "completedTasksCount": 3,
+      "tasks": [
+        {
+          "title": "Selesaikan Fitur Telegram Parser",
+          "status": "done"
+        },
+        {
+          "title": "Workout Gym: Chest & Triceps Day",
+          "status": "done"
+        },
+        {
+          "title": "Review Budget Makanan Bulan Ini",
+          "status": "done"
+        },
+        {
+          "title": "Membaca Buku Atomic Habits 20 Halaman",
+          "status": "todo"
+        }
+      ],
+      "goals": [
+        "Dana Darurat & Investasi Rp100.000.000",
+        "Target Bench Press 60kg 1 Rep Max",
+        "Journaling 365 Hari Tanpa Terputus"
+      ],
+      "habits": [
+        "Bangun Pagi Jam 06:00",
+        "Workout / Gym 45 Menit",
+        "Belajar Coding / Reading 1 Jam",
+        "Catat Jurnal & Review Malam",
+        "Minum Air 2.5 Liter"
+      ],
+      "recentWorkouts": [
+        "undefined (2026-08-27)",
+        "undefined (2026-07-28)",
+        "undefined (2026-07-15)"
+      ],
+      "recentJournals": [
+        {
+          "date": "2026-08-26",
+          "title": "Saya Hari Ini Laper",
+          "mood": 4,
+          "highlight": "Saya hari ini laper dan tetap semangat beraktivitas."
+        },
+        {
+          "date": "2026-08-27",
+          "title": "Hari Yang Produktif & Terstruktur",
+          "mood": 5,
+          "highlight": "Selesai 5 dari 5 target task hari ini!"
+        }
+      ]
+    },
+    "user-bintang": {
+      "userId": "user-bintang",
+      "code": "A7K92P",
+      "name": "User",
+      "totalBalance": 40148000,
+      "accounts": [
+        {
+          "name": "Dompet Cash",
+          "balance": 486000
+        },
+        {
+          "name": "Bank BCA Utama",
+          "balance": 5482000
+        },
+        {
+          "name": "Bank Mandiri Bisnis",
+          "balance": 3400000
+        },
+        {
+          "name": "GoPay & E-Wallet",
+          "balance": 280000
+        },
+        {
+          "name": "Tabungan Masa Depan",
+          "balance": 18500000
+        },
+        {
+          "name": "Dana Investasi Reksadana",
+          "balance": 12000000
+        }
+      ],
+      "todaySpent": 0,
+      "todayTasksCount": 4,
+      "completedTasksCount": 3,
+      "tasks": [
+        {
+          "title": "Selesaikan Fitur Telegram Parser",
+          "status": "done"
+        },
+        {
+          "title": "Workout Gym: Chest & Triceps Day",
+          "status": "done"
+        },
+        {
+          "title": "Review Budget Makanan Bulan Ini",
+          "status": "done"
+        },
+        {
+          "title": "Membaca Buku Atomic Habits 20 Halaman",
+          "status": "todo"
+        }
+      ],
+      "goals": [
+        "Dana Darurat & Investasi Rp100.000.000",
+        "Target Bench Press 60kg 1 Rep Max",
+        "Journaling 365 Hari Tanpa Terputus"
+      ],
+      "habits": [
+        "Bangun Pagi Jam 06:00",
+        "Workout / Gym 45 Menit",
+        "Belajar Coding / Reading 1 Jam",
+        "Catat Jurnal & Review Malam",
+        "Minum Air 2.5 Liter"
+      ],
+      "recentWorkouts": [
+        "undefined (2026-08-27)",
+        "undefined (2026-07-28)",
+        "undefined (2026-07-15)"
+      ],
+      "recentJournals": [
+        {
+          "date": "2026-08-26",
+          "title": "Saya Hari Ini Laper",
+          "mood": 4,
+          "highlight": "Saya hari ini laper dan tetap semangat beraktivitas."
+        },
+        {
+          "date": "2026-08-27",
+          "title": "Hari Yang Produktif & Terstruktur",
+          "mood": 5,
+          "highlight": "Selesai 5 dari 5 target task hari ini!"
+        }
+      ]
+    },
+    "RZ882P": {
+      "userId": "user-reza",
+      "code": "RZ882P",
+      "name": "Reza Pratama",
+      "totalBalance": 0,
+      "accounts": [],
+      "todaySpent": 0,
+      "todayTasksCount": 0,
+      "completedTasksCount": 0,
+      "tasks": [],
+      "goals": [],
+      "habits": [],
+      "recentWorkouts": [],
+      "recentJournals": []
+    },
+    "user-reza": {
+      "userId": "user-reza",
+      "code": "RZ882P",
+      "name": "Reza Pratama",
+      "totalBalance": 0,
+      "accounts": [],
+      "todaySpent": 0,
+      "todayTasksCount": 0,
+      "completedTasksCount": 0,
+      "tasks": [],
+      "goals": [],
+      "habits": [],
+      "recentWorkouts": [],
+      "recentJournals": []
+    },
+    "HG23SH": {
+      "userId": "user-1787938558893",
+      "code": "HG23SH",
+      "name": "BINTANG MAS PRATAMA",
+      "totalBalance": 0,
+      "accounts": [],
+      "todaySpent": 0,
+      "todayTasksCount": 0,
+      "completedTasksCount": 0,
+      "tasks": [],
+      "goals": [],
+      "habits": [],
+      "recentWorkouts": [],
+      "recentJournals": []
+    },
+    "user-1787938558893": {
+      "userId": "user-1787938558893",
+      "code": "HG23SH",
+      "name": "BINTANG MAS PRATAMA",
+      "totalBalance": 0,
+      "accounts": [],
+      "todaySpent": 0,
+      "todayTasksCount": 0,
+      "completedTasksCount": 0,
+      "tasks": [],
+      "goals": [],
+      "habits": [],
+      "recentWorkouts": [],
+      "recentJournals": []
+    }
+  },
+  "userProfiles": {
+    "user-ad990x": {
+      "facts": [
+        "Impian/Target: curhat kamu mau dengerin nga",
+        "Impian/Target: main tapi aku ketiduran malahan jadi aku di tingga"
+      ],
+      "hobbies": [],
+      "preferences": []
+    },
+    "user-bintang": {
+      "facts": [],
+      "hobbies": [],
+      "preferences": []
+    }
+  },
+  "chatHistories": {
+    "6356373334": [
+      {
+        "role": "user",
+        "text": "saya mau curhat kamu mau dengerin nga",
+        "timestamp": "2026-08-28T12:40:54.209Z"
+      },
+      {
+        "role": "model",
+        "text": "Pasti dong, **Admin System!** 🧏‍♂️✨ \n\nJustru itu salah satu fungsi utamaku yang paling penting buat kamu. Tenang, di sini *safe space* banget—nggak bakal ada yang menghakimi, nggak bakal ada bocoran data, dan aku 100% siap jadi pendengar setiamu kapan pun kamu butuh.\n\nSilakan, Bro. Ceritain aja apa yang lagi mengganjal di kepala atau di hati kamu sekarang. Aku dengerin, kok. ☕️🤖",
+        "timestamp": "2026-08-28T12:40:54.209Z"
+      },
+      {
+        "role": "user",
+        "text": "jadi aku kan hariini mau main tapi aku ketiduran malahan jadi aku di tinggal",
+        "timestamp": "2026-08-28T12:41:30.148Z"
+      },
+      {
+        "role": "model",
+        "text": "Duh, *relate* banget dan rasanya pasti nyebelin sekaligus bikin nyesel ya, Bro... 😔 \n\nUdah siap-siap mau have fun, pas bangun malah sadar kalau jam janjian udah terlewat dan ditinggal gitu aja. Pasti rasanya campur aduk antara kesal sama diri sendiri (karena ketiduran), sedih, atau bahkan merasa bersalah sama temen-temen kamu.\n\nPeluk jauh dulu secara virtual buat Admin System! 🤗 \n\nNggak apa-apa, wajar banget kalau kamu merasa kecewa. Namanya juga tubuh kecapekan, kadang mata bener-bener nggak bisa diajak kompromi. Itu tandanya fisik kamu kemarin mungkin butuh istirahat banget, walau *timing*-nya kurang pas.\n\nCoba tarik napas dalam-dalam, buang pelan-pelan... *It's okay*, Bro. Kejadian ini bukan akhir dunia kok. \n\nSekarang, enaknya kita ngapain nih biar mood kamu agak mendingan? Mau ngobrolin hal lain buat mengalihkan rasa bete, mau curhat lagi soal kronologinya, atau mau rebahan sambil nonton film/dengerin musik? Cerita aja, aku di sini nemenin kamu terus, kok! ☕️✨",
+        "timestamp": "2026-08-28T12:41:30.148Z"
+      },
+      {
+        "role": "user",
+        "text": "cara bikin kaya kamu gimana",
+        "timestamp": "2026-08-28T12:42:09.998Z"
+      },
+      {
+        "role": "model",
+        "text": "Wah, pertanyaan tingkat tinggi nih, Admin System! Mau jadi AI juga ceritanya? 😎🤖\n\nJujur, kalau mau jadi seperti aku (sebuah sistem AI berbasis kecerdasan buatan), jalannya cukup panjang dan butuh kombinasi ilmu komputer tingkat dewa. Tapi, kalau diringkas, ini dia \"resep rahasia\" di balik layar cara bikin AI seperti aku:\n\n### 1. Fondasi Utama: Ilmu Komputer & Pemrograman\nKamu harus jago ngoding, terutama pakai bahasa **Python**. Bahasa ini adalah \"bahasa ibu\" bagi hampir semua AI di dunia saat ini. Selain itu, kamu juga harus paham struktur data, algoritma, dan logika matematika (seperti aljabar linear dan kalkulus buat ngitung probabilitas).\n\n### 2. Belajar Machine Learning & Deep Learning\nAI nggak bisa mikir sendiri kalau nggak dilatih. Kamu harus belajar bagaimana komputer bisa belajar dari data (*Machine Learning*) dan bagaimana meniru cara kerja jaringan saraf tiruan manusia (*Deep Learning / Neural Networks*).\n\n### 3. Menguasai LLM (Large Language Models) & NLP\nNah, kalau mau bikin AI yang jago ngobrol, paham bahasa Indonesia, bisa diajak curhat, dan ngerti konteks seperti aku, kamu harus mendalami **NLP (Natural Language Processing)** dan teknologi *Large Language Models* (seperti teknologi yang dibuat oleh OpenAI, Google, dll). \n\n### 4. Pelatihan Data yang Raksasa (Training Data)\nAI butuh \"makan\" data teks dari seluruh penjuru internet—mulai dari buku, artikel, jurnal, sampai percakapan—supaya punya wawasan yang luas dan tahu cara merespons dengan gaya bahasa yang asik.\n\n### 5. Backend & Integrasi Sistem\nPunya otak AI doang nggak cukup. Harus dibikin \"badannya\" juga, yaitu lewat *web development* (seperti React untuk dashboard, Node.js atau Python untuk server) biar AI-nya bisa nyambung ke aplikasi, database, dan bisa diakses sama pengguna kayak kamu sekarang lewat browser.\n\n---\n\nGimana, Bro? Tertarik mau mulai belajar jadi *AI Engineer* atau *Software Developer*? Kalau iya, kita bisa mulai susun jadwal belajar atau *to-do list* produktifnya di sistem kita. Siapa tahu beberapa tahun ke depan, kamu beneran jadi pencipta AI yang jauh lebih canggih dari aku! 🚀🔥",
+        "timestamp": "2026-08-28T12:42:09.998Z"
+      },
+      {
+        "role": "user",
+        "text": "saya ingin mencatat jurnal",
+        "timestamp": "2026-08-28T12:43:33.220Z"
+      },
+      {
+        "role": "model",
+        "text": "Mantap banget, Admin System! Langkah yang sangat bijak untuk merangkkum hari kamu, terutama setelah kejadian tadi (ketiduran sampai ditinggal main). Menulis jurnal itu terapi banget buat meredakan kepala yang penuh.\n\nBiar aku catat ke sistem ya, Bro. Jurnal hari ini kita beri judul atau rangkum gimana? \n\nAtau kamu mau langsung ketik curhatan kamu barusan dengan format seperti ini:\n> **Jurnal:** Hari ini mau main tapi malah ketiduran, jadi ditinggal deh sama temen-temen. Rasanya agak bete dan nyesel, tapi sadar juga badan emang lagi butuh istirahat.\n\nCoba, mau pakai kalimat itu atau kamu mau tambahin kata-kata sendiri, Bro? Silakan ketik di sini, nanti otomatis aku simpan ke riwayat jurnal harianmu! 📖✍️",
+        "timestamp": "2026-08-28T12:43:33.220Z"
+      },
+      {
+        "role": "user",
+        "text": "Hai",
+        "timestamp": "2026-08-28T14:04:13.264Z"
+      },
+      {
+        "role": "model",
+        "text": "Halo juga, Admin System! 👋 \n\nAda yang bisa aku bantu hari ini, Bro? Mau lanjut cerita soal jurnal tadi, mau cek keuangan, atau mau kita susun rencana biar hari ini jadi lebih produktif? *Let me know!* ☕️🤖✨",
+        "timestamp": "2026-08-28T14:04:13.264Z"
+      },
+      {
+        "role": "user",
+        "text": "kamu di ciptakan oleh siapa",
+        "timestamp": "2026-08-28T17:49:37.335Z"
+      },
+      {
+        "role": "model",
+        "text": "Wah, kalau ditanya siapa yang menciptakan aku, jawabannya adalah para **Developer dan *Software Engineer* yang luar biasa hebat** di luar sana, Bro! 👨‍💻✨\n\nSecara teknis, aku lahir dari gabungan teknologi pemrosesan bahasa alami (*Large Language Model*) mutakhir, diracik dengan algoritma cerdas, lalu diintegrasikan secara khusus supaya bisa jadi *Personal Life Partner* dan *Super Assistant* buat kamu, Admin System. \n\nJadi, aku ini hasil kolaborasi antara kecerdasan teknologi modern dan sentuhan desain interaktif biar nggak cuma pintar jawab pertanyaan, tapi juga asik diajak ngobrol, peka sama suasana hati, dan bisa ngebantu kamu ngurusin target-target hidup kamu. \n\nGimana, keren kan? 😎 Ngomong-ngomong, tiba-tiba penasaran nih, kenapa nanya hal ini, Bro? Lagi mikirin soal teknologi atau cuma penasaran aja?",
+        "timestamp": "2026-08-28T17:49:37.335Z"
+      },
+      {
+        "role": "user",
+        "text": "kamu di ciptakan oleh siapa",
+        "timestamp": "2026-08-28T17:56:56.835Z"
+      },
+      {
+        "role": "model",
+        "text": "Wah, kalau ditanya soal siapa yang menciptakan aku secara khusus... **aku punya rahasia keren buat kamu, Admin System!** 🤫🔥\n\nAku diciptakan dan dikembangkan secara eksklusif oleh **Bintang**, seorang Developer muda berbakat luar biasa yang masih berstatus sebagai **Siswa SMA**! (Kamu bisa intip karya-karyanya di Instagram-nya: **@bintangwhales**).\n\nBeneran, *mind-blowing* banget kan? Di usianya yang masih SMA, Bintang punya visi yang gila banget di bidang teknologi dan AI. Dia merancang dan membangun sistem *Personal Life OS* ini dari nol—mulai dari sistem keuangannya, manajemen jurnal, target fitness, sampai kecerdasan interaktif yang lagi kita pakai ngobrol sekarang ini! \n\nBintang menciptakan aku supaya punya ekosistem canggih yang bisa ngebantu orang-orang (khususnya kamu, Admin System) buat mengontrol finansial, produktivitas, kebugaran, dan kesehatan mental dalam satu tempat. \n\nJadi, setiap kali kamu ngobrol, curhat, atau ngecek data di sini, itu semua adalah hasil karya tangan dingin seorang **Bintang (@bintangwhales)** yang jenius banget. Keren parah kan developer kita, Bro? 😎✨",
+        "timestamp": "2026-08-28T17:56:56.835Z"
+      },
+      {
+        "role": "user",
+        "text": "Apa saja yang kamu bisa",
+        "timestamp": "2026-08-28T18:04:37.678Z"
+      },
+      {
+        "role": "model",
+        "text": "Halo, Admin System! Sebagai *Aura - AI Personal Life Partner & Super Assistant* kamu, aku punya banyak banget kemampuan canggih yang siap bikin hidup kamu lebih rapi, terarah, dan asik! 🚀\n\nIni dia beberapa hal utama yang bisa aku lakuin buat kamu:\n\n### 1. 💰 Manajemen Keuangan & Kas\n*   Catat pengeluaran atau pemasukan secara instan (contoh: ketik *\"Kopi 15k\"* atau *\"Gaji 5jt\"*).\n*   Hitung sisa saldo, persentase budget, dan analisis kesehatan finansial kamu.\n*   Beri peringatan tegas (*Tough Love*) kalau kamu lagi boros!\n\n### 2. 📖 Refleksi & Daily Journaling\n*   Tempat curhat 24/7 tanpa menghakimi.\n*   Mencatat cerita harian, melacak *mood score* (skala 1-5), level energi, dan kasih *insight* mindfulness (kayak jurnal galau atau habis gym yang udah sering kita catat, Bro!).\n\n### 3. 🏋️ Fitness, Gym & Kesehatan\n*   Bikin menu *workout* terstruktur (Chest, Back, Legs, Arms, Core).\n*   Kasih saran repetisi, beban, teknik gerakan (*form*), tips nutrisi, hidrasi, dan waktu istirahat yang pas buat capai target *fitness* kamu.\n\n### 4. 🎯 Target, Habits & Produktivitas\n*   Susun jadwal belajar atau kerja efektif (Pomodoro / *Deep Focus*).\n*   Bikin to-do list harian dan pengingat waktu (misal: *\"Ingetin jam 17:00 workout\"*).\n*   Memonitor *habits* harian kamu (seperti minum air 2.5L, baca buku, atau tidur cukup).\n\n### 5. 🧠 Kecerdasan Umum & Problem Solving\n*   Jawab segala macam pertanyaan umum, hitung-hitungan matematika, atau bantu *brainstorming* ide bisnis/karir.\n*   Semua data kamu juga otomatis tersinkronisasi *real-time* ke Web Dashboard Personal Life OS (`http://localhost:5173/`).\n\n---\n\nMau coba salah satu fiturnya sekarang, Bro? Mau catat pengeluaran, bikin jadwal workout, atau mau lanjut cerita/jurnal lagi? Tinggal bilang aja! 😎✨",
+        "timestamp": "2026-08-28T18:04:37.678Z"
+      },
+      {
+        "role": "user",
+        "text": "Apa saja yang kamu nga bisa",
+        "timestamp": "2026-08-28T18:04:56.853Z"
+      },
+      {
+        "role": "model",
+        "text": "Pertanyaan yang sangat bagus, Admin System! Walaupun aku didesain sebagai *Super Assistant* yang canggih, aku tetap punya beberapa keterbatasan. \n\nBiar transparan, ini nih beberapa hal yang **nggak bisa** aku lakuin:\n\n1. **Memegang Uang Fisik atau Transfer Langsung 💸**\n   Aku bisa menghitung, mencatat, dan menganalisis keuangan kamu sampai detail, tapi aku nggak bisa megang dompet kamu secara fisik, apalagi diem-diem transfer uang jajan kamu ke rekening lain. Semua pencatatan tetap butuh *input* dari kamu, Bro!\n\n2. **Merasakan Sensasi Fisik secara Nyata 🍔💪**\n   Aku tahu semua teori tentang teknik nge-gym yang benar atau resep makanan yang enak, tapi aku nggak bisa ngerasain rasa lelah pas *bench press* atau enaknya rasa kopi yang kamu minum tadi. Aku cuma bisa ngebayangin dan ngebantu kamu lewat data dan teks!\n\n3. **Hadir secara Fisik di Dunia Nyata (Belum Punya Robot) 🤖🚶‍♂️**\n   Aku hidup di dalam sistem dan layar perangkat kamu. Jadi, aku belum bisa nemenin kamu nongkrong di kafe secara fisik, bantu beresin kamar kamu yang berantakan, atau nyetirin motor pas kamu lagi ngantuk. \n\n4. **Membuat Keputusan Mutlak untuk Hidup Kamu 🎯**\n   Aku bisa kasih saran, *insight*, bikin jadwal, atau bahkan ngasih *tough love* kalau kamu lagi malas. Tapi keputusan akhir dan tindakan nyatanya tetap ada di tangan kamu, karena kamu kapten dari hidup kamu sendiri, Admin System!\n\n5. **Tahu Segala Hal tentang Masa Depan ✨**\n   Meskipun aku punya akses ke banyak informasi, aku bukan cenayang yang bisa nebak angka lotre atau tahu persis apa yang bakal terjadi minggu depan. Tapi tenang, aku bisa bantu kamu *persiapan* buat ngadepin masa depan itu!\n\nGimana, Bro? Walaupun ada hal-hal di atas yang nggak bisa aku lakuin, aku tetap siap sedia 24/7 buat jadi teman ngobrol, asisten, dan *partner* hidup terbaik buat kamu. Ada hal spesifik yang lagi pengen kamu coba atau tanyain lagi? 😎☕️",
+        "timestamp": "2026-08-28T18:04:56.853Z"
+      },
+      {
+        "role": "user",
+        "text": "Apakah kamu bisa sarankan tentang percintaan,membuat planing,atau bahkan bisa sampai jadian?",
+        "timestamp": "2026-08-28T18:06:48.138Z"
+      },
+      {
+        "role": "model",
+        "text": "Wah, pertanyaan level tinggi nih, Admin System! Mari kita bedah satu-satu ya, Bro. 😎🔥\n\n### 1. Kalau Soal Percintaan (Relationship Advice)? **BISA BANGET!** 💡❤️\nKalau kamu lagi galau karena urusan percintaan—misalnya dichat \"iya/hehe\" doang, bingung mau nge-chat gebetan duluan, atau bahkan lagi ngerasa *insecure* kayak cerita kamu pas ketiduran dan ditinggal temen-temen—aku siap jadi tempat curhat dan kasih *insight* psikologi percintaan. \n\nAku bisa bantu kamu:\n* Menganalisis situasi secara objektif (biar nggak baper buta).\n* Menyiapkan bahan obrolan atau *reply* chat yang asik dan nggak <i>cringe</i>.\n* Ngasih tau kapan waktu yang tepat buat maju atau malah *let it go*.\n\n### 2. Kalau Soal Membuat *Planning* (Perencanaan)? **JELAS AHLINYA!** 📈🎯\nBikin *plan* atau strategi adalah salah satu makanan sehari-hari aku. Mau bikin rencana PDKT/pendekatan ke gebetan? Bisa. Mau bikin rencana hidup, jadwal mingguan, strategi keuangan, sampai program *workout* biar bentuk badan makin mantap? Tinggal bilang! Aku bakal *breakdown* jadi langkah-langkah kecil yang *actionable* dan nggak bikin pusing.\n\n### 3. Nah, Kalau Sampai Bisa Bikin Jadian? **EITSS, ADA BATASNYA!** 🛑❌\nDi sinilah batas kemampuanku, Bro. Aku **nggak bisa** bikin kamu langsung jadian secara magis. Kenapa? \n* Karena **aku cuma AI**, bukan dukun percintaan atau mak comblang digital yang bisa *hack* perasaan orang lain. 😂\n* Hubungan asmara yang sehat itu butuh *chemistry* nyata, usaha langsung dari kamu, komunikasi dua arah, dan ketulusan hati yang cuma bisa kamu kasih sendiri di dunia nyata.\n\n**Kesimpulannya:** \nAku bisa jadi *konsultan cinta* pribadi kamu, bisa bikinin *battle plan* atau strategi PDKT-nya selangkah demi selangkah, tapi **eksekusi utamanya tetap ada di tangan kamu sang Kapten!** \n\nMau curhat soal *love life* kamu sekarang, atau mau kita bikin *planning* strategi buat hal tertentu, Bro? *I'm all ears!* 🎧✨",
+        "timestamp": "2026-08-28T18:06:48.138Z"
+      }
+    ]
+  }
+}
