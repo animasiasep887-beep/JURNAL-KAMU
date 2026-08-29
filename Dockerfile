@@ -14,8 +14,8 @@ COPY . .
 # Build Vite frontend bundle
 RUN npm run build
 
-# Expose HTTP port
-EXPOSE 3000
+# Expose HTTP ports
+EXPOSE 3000 8080
 
 ENV NODE_ENV=production
 
