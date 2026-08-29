@@ -92,14 +92,6 @@ const MainLayout: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  if (!currentUser) {
-    return <AuthPage />;
-  }
-
-  if (!currentUser.onboardingCompleted) {
-    return <UserOnboarding />;
-  }
-
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex font-sans antialiased">
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -419,15 +411,31 @@ const MainLayout: React.FC = () => {
   );
 };
 
+const AppContent: React.FC = () => {
+  const { currentUser } = useAuth();
+
+  if (!currentUser) {
+    return <AuthPage />;
+  }
+
+  if (!currentUser.onboardingCompleted) {
+    return <UserOnboarding />;
+  }
+
+  return (
+    <DataProvider>
+      <NotificationProvider>
+        <MainLayout />
+      </NotificationProvider>
+    </DataProvider>
+  );
+};
+
 export default function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <DataProvider>
-          <NotificationProvider>
-            <MainLayout />
-          </NotificationProvider>
-        </DataProvider>
+        <AppContent />
       </AuthProvider>
     </ThemeProvider>
   );
