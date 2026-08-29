@@ -103,12 +103,12 @@ export const FloatingBotWidget: React.FC = () => {
               <span>Voice Note & OCR Ready</span>
             </span>
             <a
-              href="https://t.me"
+              href={`https://t.me/PersonalLifeOSBot?start=${userCode}`}
               target="_blank"
               rel="noreferrer"
-              className="text-indigo-400 hover:underline flex items-center gap-1 font-medium"
+              className="text-sky-400 hover:text-sky-300 hover:underline flex items-center gap-1 font-medium"
             >
-              <span>Buka Telegram</span>
+              <span>Buka Bot Telegram</span>
               <ExternalLink className="w-2.5 h-2.5" />
             </a>
           </div>

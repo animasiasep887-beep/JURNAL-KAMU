@@ -98,6 +98,45 @@ function handleRequest(req, res) {
       return;
     }
 
+    // 2.5 API: /api/test-notification
+    if (pathname === '/api/test-notification' && req.method === 'POST') {
+      let body = '';
+      req.on('data', chunk => body += chunk);
+      req.on('end', () => {
+        try {
+          const parsed = JSON.parse(body || '{}');
+          const chatId = parsed.chatId || '6356373334';
+          const code = parsed.code || 'A7K92P';
+          const name = parsed.name || 'Pengguna Life OS';
+          const BOT_TOKEN = process.env.BOT_TOKEN || '8822689275:AAG4YdP9tr2ApkyIh1rw387PlUnmp1JQit0';
+
+          const text = `🔔 **TEST NOTIFIKASI TELEGRAM BERHASIL!** 🚀\n\nHalo **${name}**! Akun Personal Life OS Anda (Kode: \`${code}\`) resmi terhubung 100% secara real-time!\n\n✨ **Fitur Aktif:**\n• Catat Pengeluaran (*Kopi 15k*)\n• Catat Pemasukan (*Gaji 5jt bank*)\n• Tulis Jurnal Harian (*jurnaling: ...*)\n• Cek Saldo & Keborosan (*cek keuangan*)\n\nSemua data Anda aman, privat, dan terpisah untuk akun Anda sendiri! 🎉💪`;
+
+          const postData = JSON.stringify({ chat_id: chatId, text, parse_mode: 'Markdown' });
+          const tgReq = https.request(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Content-Length': Buffer.byteLength(postData)
+            }
+          }, (tgRes) => {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, statusCode: tgRes.statusCode }));
+          });
+          tgReq.on('error', (err) => {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, error: err.message }));
+          });
+          tgReq.write(postData);
+          tgReq.end();
+        } catch (e) {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: false }));
+        }
+      });
+      return;
+    }
+
     // 3. Static Files from dist/
     let filePath = path.join(DIST_DIR, pathname === '/' ? 'index.html' : pathname);
 

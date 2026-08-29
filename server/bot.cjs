@@ -1040,7 +1040,13 @@ function generateAIAgentFallback(userText, chatId, targetUserId, code, userData,
 
 // HELPER: CONNECT ACCOUNT FUNCTION
 function performConnect(ctx, rawCode, chatId) {
-  const code = (rawCode || '').trim().toUpperCase();
+  let code = (rawCode || '')
+    .replace(/^\/start\s*/i, '')
+    .replace(/^\/connect\s*/i, '')
+    .replace(/^connect[_\s]*/i, '')
+    .trim()
+    .toUpperCase();
+
   const db = loadDB();
 
   if (code && code.length >= 4) {
@@ -1063,22 +1069,32 @@ function performConnect(ctx, rawCode, chatId) {
     db.codes[code] = targetUserId;
     saveDB(db);
 
-    const userName = code === 'AD990X' ? 'Admin System' : (code === 'A7K92P' ? 'Bintang Mas' : (code === 'HJYNCJ' ? 'Randi Pratama' : (code === 'RZ882P' ? 'Reza Pratama' : 'Pengguna')));
+    let userName = 'Pengguna Life OS';
+    if (db.userSummaries && db.userSummaries[targetUserId] && db.userSummaries[targetUserId].name) {
+      userName = db.userSummaries[targetUserId].name;
+    } else if (code === 'AD990X') userName = 'Admin System';
+    else if (code === 'A7K92P') userName = 'Bintang Mas';
+    else if (code === 'RZ882P') userName = 'Reza Pratama';
+    else if (code === 'HJYNCJ') userName = 'Randi Pratama';
 
-    ctx.reply(
-      `✅ **KONEKSI BERHASIL, BOS!** 🎉🚀\n\nTelegram (*ID: ${chatId}*) resmi terhubung ke akun **${userName}** (Kode: \`${code}\`).\n\nStatus di Web Dashboard Anda sekarang sudah aktif **🟢 TERHUBUNG**!\n\n💡 Gunakan tombol menu di bawah untuk akses cepat atau ketik langsung transaksi Anda (e.g. *Kopi 15k*, *Pulsa 50k*)! wkwk 😁`,
-      {
-        parse_mode: 'Markdown',
-        reply_markup: getMainKeyboard(true),
-      }
-    );
+    const welcomeMsg = `🎉 **KONEKSI BERHASIL & BOT AKTIF SATSET!** 🚀\n\nHalo **${userName}**! Akun Telegram Anda resmi terhubung ke Web Dashboard Personal Life OS (Kode: \`${code}\`).\n\n🟢 **Status di Web:** **TERHUBUNG REAL-TIME**\n\n✨ **Panduan Singkat Pakai Bot (Tinggal Ketik Santai):**\n• 💵 **Catat Pengeluaran:** \`Kopi 15k\`, \`Makan 25k bca\`, \`Bensin 30k gopay\`\n• 💰 **Catat Pemasukan:** \`Gaji 5jt bank\`, \`Jual barang 150k\`\n• 🎙️ **Voice Note (VN):** Kirim rekaman suara bicara transaksi / curhat\n• 📖 **Tulis Jurnal:** \`jurnal: hari ini produktif dan meeting lancar...\`\n• 🏋️ **Catat Gym:** \`gym: bench press 60kg 3x10\`\n• ⏰ **Pasang Pengingat:** \`Ingetin jam 17:00 workout\`\n• 🧠 **Konsultasi AI Gemini:** Tanya saran budget, simulasi belanja, atau curhat 24/7!\n\n📱 **Menu Tombol Siap Pakai:** Klik tombol menu di bawah layar untuk cek saldo & jurnal cepat! 👍`;
+
+    ctx.reply(welcomeMsg, {
+      parse_mode: 'Markdown',
+      reply_markup: getMainKeyboard(true),
+    });
     return true;
   } else {
     ctx.reply(
-      `❌ **Kode Salah / Kurang Lengkap!**\n\nKirim format: \`/connect KODE_ANDA\` atau ketik langsung kodenya (contoh: \`AD990X\` atau \`A7K92P\`).\n\nCek & salin kode unik binding kamu di menu Pengaturan Telegram Web Dashboard ya!`,
+      `❌ **Format Kode Belum Tepat!**\n\nSilakan kirim kode 6-digit unik Anda (contoh: \`A7K92P\` atau \`/connect A7K92P\`).\n\n💡 *Buka Web Dashboard menu **Telegram AI Bot** untuk melihat kode Anda.*`,
       {
         parse_mode: 'Markdown',
-        reply_markup: getMainKeyboard(false),
+        reply_markup: {
+          inline_keyboard: [
+            [{ text: '❓ Cara Cek Kode Unik', callback_data: 'help_code' }],
+            [{ text: '💡 Lihat Contoh Fitur Bot', callback_data: 'help_features' }]
+          ]
+        },
       }
     );
     return false;
@@ -1087,11 +1103,17 @@ function performConnect(ctx, rawCode, chatId) {
 
 // HELPER: WARNING IF USER IS NOT CONNECTED
 function sendUnconnectedWarning(ctx) {
+  const chatId = String(ctx.chat?.id || ctx.message?.chat?.id || ctx.from?.id || '');
   ctx.reply(
-    `⚠️ **Akun Telegram Anda Belum Terhubung ke Web Dashboard!**\n\nUntuk menjaga privasi, keamanan, dan pemisahan data per pengguna, silakan hubungkan akun Anda terlebih dahulu.\n\n👉 **Cara Menghubungkan:**\nKirim perintah: \`/connect KODE_ANDA\`\natau cukup ketik langsung kode unik Anda (contoh: \`AD990X\` atau \`A7K92P\`).\n\n💡 *Salin kode koneksi unik Anda pada menu Pengaturan Telegram di Web Dashboard.*`,
+    `👋 **Halo! Akun Telegram Anda Belum Terhubung ke Web Dashboard!** 🤖\n\nAgar semua transaksi, jurnal harian, dan pengingat Anda otomatis tersinkronisasi aman dan privat ke akun Anda, yuk hubungkan akun Anda:\n\n👉 **Langkah Mudah (Hanya 3 Detik):**\n1️⃣ Buka Web Dashboard di browser HP / Laptop Anda.\n2️⃣ Buka menu **Telegram AI Bot** & lihat **Kode Unik** Anda (misal: \`A7K92P\`).\n3️⃣ **Ketik kodenya langsung di chat ini!**\n   Contoh: cukup ketik \`A7K92P\` atau \`/connect A7K92P\`\n\n_Chat ID Anda:_ \`${chatId}\``,
     {
       parse_mode: 'Markdown',
-      reply_markup: getMainKeyboard(false),
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: '💡 Contoh Kemampuan Bot', callback_data: 'help_features' }],
+          [{ text: '❓ Panduan Langkah Detail', callback_data: 'help_code' }]
+        ]
+      },
     }
   );
 }
@@ -1099,15 +1121,52 @@ function sendUnconnectedWarning(ctx) {
 // BOT COMMANDS
 bot.command('start', (ctx) => {
   const chatId = String(ctx.chat?.id || ctx.message?.chat?.id || '');
+  const text = (ctx.text || ctx.message?.text || '').trim();
+  const parts = text.split(' ');
+  const payload = (parts[1] || '').trim();
+
+  // 1. If start parameter / deep link payload is provided (e.g. /start A7K92P or /start connect_A7K92P)
+  if (payload && payload.length >= 4) {
+    return performConnect(ctx, payload, chatId);
+  }
+
   const db = loadDB();
   const binding = db.bindings[chatId];
 
+  // 2. If already connected
+  if (binding) {
+    const targetUserId = binding.userId;
+    const code = binding.code;
+    const userData = getUserData(db, targetUserId, code);
+
+    return ctx.reply(
+      `👋 **Halo lagi, ${userData.name}!** 🌅✨\n\nAkun Anda sudah **🟢 TERHUBUNG** ke Web Dashboard Personal Life OS (Kode: \`${code}\`).\n\n• 💰 **Total Saldo Aktif:** Rp${userData.totalBalance.toLocaleString('id-ID')}\n• 💸 **Pengeluaran Hari Ini:** Rp${userData.todaySpent.toLocaleString('id-ID')}\n\nSilakan klik tombol menu di bawah atau langsung ketik transaksi/jurnal/pertanyaan Anda! 🚀`,
+      {
+        parse_mode: 'Markdown',
+        reply_markup: getMainKeyboard(true),
+      }
+    );
+  }
+
+  // 3. If not connected yet: Send friendly step-by-step onboarding guide
   ctx.reply(
-    `🌅 **Selamat Datang di Official Personal Life OS AI Bot!**\n\nSaya adalah Asisten & Partner Setia AI Anda yang pintar, humoris, dan terhubung 24/7 ke Web Dashboard.\n\n📱 **Menu Tombol Siap Pakai:**\nSilakan klik tombol menu di bawah layar untuk cek saldo, pengeluaran hari ini, jurnal, dan jadwal gym secara instan! 🚀`,
+    `🌅 **Selamat Datang di Official Personal Life OS AI Bot!** 🤖✨\n\nSaya adalah AI Personal Life Partner cerdas yang terhubung 24/7 ke Web Dashboard Anda untuk mengelola keuangan, jurnal harian, rutinitas gym, dan produktivitas.\n\n🔗 **Hubungkan Akun Anda (Mudah & Cepat):**\n\n1️⃣ Buka Web Dashboard di browser HP atau Laptop Anda.\n2️⃣ Buka menu **Telegram AI Bot** untuk melihat **Kode Unik** Anda (misal: \`A7K92P\`).\n3️⃣ **Ketik kodenya langsung di chat ini!**\n   Contoh ketik: \`A7K92P\` atau \`/connect A7K92P\`\n\n*Jika Anda membuka web di HP Android, cukup klik tombol **⚡ Hubungkan Otomatis** di web untuk langsung tersambung 1-Klik!*`,
     {
       parse_mode: 'Markdown',
-      reply_markup: getMainKeyboard(!!binding),
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: '💡 Apa Saja yang Bisa Dilakukan Bot?', callback_data: 'help_features' }],
+          [{ text: '❓ Cara Menemukan Kode Unik', callback_data: 'help_code' }]
+        ]
+      },
     }
+  );
+});
+
+bot.command('help', (ctx) => {
+  ctx.reply(
+    `💡 **Panduan Lengkap Format & Fitur Bot:**\n\n💵 **Catat Pengeluaran:**\n• \`Kopi 15k\`\n• \`Makan siang 25k bca\`\n• \`Bensin 30k gopay\`\n• \`Token listrik 100k\`\n\n💰 **Catat Pemasukan:**\n• \`Gaji 5jt bank\`\n• \`Jual barang 150k\`\n\n🎙️ **Voice Note (VN):**\n• Rekam suara langsung via mic Telegram!\n\n📖 **Tulis Jurnal Harian:**\n• \`jurnal: hari ini belajar hal baru dan merasa produktif\`\n\n🏋️ **Catat Latihan Gym:**\n• \`gym: bench press 60kg 3x10\`\n\n⏰ **Pasang Pengingat:**\n• \`Ingetin jam 17:00 workout dada\`\n\n🧠 **Tanya Apapun ke AI Gemini:**\n• \`Berapa sisa budgetku?\`\n• \`Hibur aku dong capek banget\`\n• \`Buatin rencana belajar 1 jam\`\n\nSemua otomatis langsung masuk ke Web Dashboard Anda secara real-time! 🚀`,
+    { parse_mode: 'Markdown', reply_markup: getMainKeyboard(true) }
   );
 });
 
@@ -1883,10 +1942,26 @@ bot.on('audio', handleVoiceOrAudio);
 
 // ==========================================
 // 🔘 INTERACTIVE INLINE KEYBOARD CALLBACKS
-// ==========================================
 bot.on('callback_query', async (query) => {
   const data = query.data || '';
   const chatId = String(query.message?.chat?.id || query.from?.id || '');
+
+  try {
+    if (typeof bot.answerCallbackQuery === 'function') {
+      bot.answerCallbackQuery(query.id).catch(() => {});
+    }
+  } catch (e) {}
+
+  if (data === 'help_features') {
+    const featuresMsg = `💡 **Contoh Fitur & Cara Penggunaan Bot:**\n\n💵 **1. Catat Pengeluaran Instan:**\n• \`Kopi 15k\`\n• \`Makan siang 25k bca\`\n• \`Bensin 30k gopay\`\n• \`Token listrik 100k\`\n\n💰 **2. Catat Pemasukan:**\n• \`Gaji 5jt bank\`\n• \`Jual barang 150k\`\n\n🎙️ **3. Kirim Voice Note (VN):**\n• Rekam suara Anda (misal: _"Catat jajan es teh 10 ribu"_).\n\n📖 **4. Daily Journaling & Curhat:**\n• \`jurnal: hari ini bersyukur semua target beres\`\n\n🏋️ **5. Catat Gym & Workout:**\n• \`gym: bench press 60kg 3x10\`\n\n⏰ **6. Pasang Alarm Pengingat:**\n• \`Ingetin jam 17:00 workout\`\n\n🧠 **7. AI Life Partner & Konsultasi:**\n• \`Berapa sisa budgetku?\`\n• \`Hibur aku dong capek banget\`\n\nSemua data langsung tersinkronisasi otomatis ke Web Dashboard Anda! 🚀`;
+    return sendTelegramNotification(chatId, featuresMsg);
+  }
+
+  if (data === 'help_code') {
+    const codeMsg = `❓ **Cara Menemukan Kode Unik Koneksi Anda:**\n\n1️⃣ Buka Web Dashboard Personal Life OS di browser HP / Laptop Anda.\n2️⃣ Buka menu **Telegram AI Bot** di sidebar / menu navigasi.\n3️⃣ Di bagian kartu **Status Akun Anda**, temukan **Kode Unik Anda** (contoh: \`A7K92P\`).\n4️⃣ Salin kode tersebut dan kirim ke bot ini (cukup ketik: \`A7K92P\` atau \`/connect A7K92P\`).\n\n✨ Begitu terkirim, bot akan otomatis mengenali akun Anda dan status di web akan berubah menjadi **🟢 TERHUBUNG**!`;
+    return sendTelegramNotification(chatId, codeMsg);
+  }
+
   const db = loadDB();
   const binding = db.bindings[chatId];
   if (!binding) return;
@@ -1900,11 +1975,6 @@ bot.on('callback_query', async (query) => {
       saveDB(db);
     }
     try {
-      if (typeof bot.answerCallbackQuery === 'function') {
-        bot.answerCallbackQuery(query.id, { text: '🗑️ Transaksi telah dihapus!' }).catch(() => {});
-      }
-    } catch (e) {}
-    try {
       if (typeof bot.editMessageText === 'function') {
         bot.editMessageText('❌ **Transaksi ini telah dibatalkan & dihapus dari sistem Web Dashboard.**', {
           chat_id: chatId,
@@ -1915,11 +1985,6 @@ bot.on('callback_query', async (query) => {
     } catch (e) {}
   } else if (data === 'view_balance') {
     const userData = getUserData(db, targetUserId, code);
-    try {
-      if (typeof bot.answerCallbackQuery === 'function') {
-        bot.answerCallbackQuery(query.id, { text: `Saldo: Rp${userData.totalBalance.toLocaleString('id-ID')}` }).catch(() => {});
-      }
-    } catch (e) {}
     const accountsList = userData.accounts.map((a) => `• **${a.name}:** Rp${a.balance.toLocaleString('id-ID')}`).join('\n');
     sendTelegramNotification(chatId, `💰 **Saldo Terkini Akun ${userData.name}:**\n\n${accountsList}\n\n💸 **Total Saldo Aktif:** **Rp${userData.totalBalance.toLocaleString('id-ID')}**`);
   }
