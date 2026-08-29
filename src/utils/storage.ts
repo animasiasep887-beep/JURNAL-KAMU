@@ -82,7 +82,7 @@ export const storage = {
   getUsers: (): User[] => getItem(KEYS.USERS, INITIAL_USERS),
   setUsers: (users: User[]) => setItem(KEYS.USERS, users),
 
-  getCurrentUserId: (): string => getItem(KEYS.CURRENT_USER_ID, 'user-bintang'),
+  getCurrentUserId: (): string => getItem(KEYS.CURRENT_USER_ID, ''),
   setCurrentUserId: (id: string) => setItem(KEYS.CURRENT_USER_ID, id),
 
   getAccounts: (): Account[] => getItem(KEYS.ACCOUNTS, INITIAL_ACCOUNTS),
