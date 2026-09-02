@@ -860,3 +860,31 @@ export const INITIAL_SUBSCRIPTION_HISTORY: SubscriptionHistoryItem[] = [
   { id: 'sh-1', userId: 'user-bintang', planId: 'premium', planName: 'Premium OS', startDate: '2026-08-01', expiryDate: '2026-08-31', status: 'active', activatedBy: 'Admin System', createdAt: '2026-08-01T09:00:00Z' },
   { id: 'sh-2', userId: 'user-bintang', planId: 'premium', planName: 'Premium OS', startDate: '2026-09-01', expiryDate: '2026-09-30', status: 'extended', activatedBy: 'Admin System', createdAt: '2026-08-15T14:00:00Z' },
 ];
+
+export const INITIAL_RECURRING_SUBSCRIPTIONS: import('../types').RecurringSubscription[] = [
+  { id: 'sub-1', userId: 'user-bintang', name: 'Spotify Premium Family', amount: 86900, billingCycle: 'monthly', billingDay: 5, category: 'Hiburan', paymentMethod: 'BCA', icon: 'Music', isActive: true, notes: 'Auto-debet tanggal 5 tiap bulan', createdAt: '2026-08-01' },
+  { id: 'sub-2', userId: 'user-bintang', name: 'Netflix 4K UHD', amount: 186000, billingCycle: 'monthly', billingDay: 18, category: 'Hiburan', paymentMethod: 'Kartu Kredit', icon: 'Tv', isActive: true, notes: 'Langganan shared account', createdAt: '2026-08-01' },
+  { id: 'sub-3', userId: 'user-bintang', name: 'iCloud 200GB Storage', amount: 45000, billingCycle: 'monthly', billingDay: 28, category: 'Utilitas', paymentMethod: 'GoPay', icon: 'Cloud', isActive: true, notes: 'Backup iPhone & MacBook', createdAt: '2026-08-01' },
+  { id: 'sub-4', userId: 'user-bintang', name: 'Gym Membership Gold', amount: 350000, billingCycle: 'monthly', billingDay: 1, category: 'Kesehatan', paymentMethod: 'BCA', icon: 'Dumbbell', isActive: true, notes: 'Akses 24/7 fitness center', createdAt: '2026-08-01' },
+];
+
+export const INITIAL_DEBTS: import('../types').DebtItem[] = [
+  { id: 'debt-1', userId: 'user-bintang', type: 'receivable', personName: 'Andi Saputra', amount: 500000, paidAmount: 200000, dueDate: '2026-09-15', notes: 'Pinjam untuk servis motor', status: 'partial', createdAt: '2026-08-10', updatedAt: '2026-08-20' },
+  { id: 'debt-2', userId: 'user-bintang', type: 'payable', personName: 'Toko Elektronik Makmur', amount: 1200000, paidAmount: 1200000, dueDate: '2026-08-25', notes: 'Cicilan monitor 27 inch 0%', status: 'settled', createdAt: '2026-07-25', updatedAt: '2026-08-25' },
+  { id: 'debt-3', userId: 'user-bintang', type: 'receivable', personName: 'Budi Santoso', amount: 150000, paidAmount: 0, dueDate: '2026-09-05', notes: 'Talangan makan bareng di Resto', status: 'unpaid', createdAt: '2026-08-29', updatedAt: '2026-08-29' },
+];
+
+export const INITIAL_REWARDS: import('../types').PersonalReward[] = [
+  { id: 'rew-1', userId: 'user-bintang', title: 'Secangkir Kopi Premium di Kafe', costCoins: 150, icon: 'Coffee', description: 'Self reward nikmat setelah 7 hari streak jurnal penuh', isClaimed: false, category: 'Food & Drink', createdAt: '2026-08-01' },
+  { id: 'rew-2', userId: 'user-bintang', title: 'Main Game Favorit 2 Jam Bebas', costCoins: 200, icon: 'Gamepad2', description: 'Waktu santai main tanpa rasa bersalah', isClaimed: false, category: 'Gaming', createdAt: '2026-08-01' },
+  { id: 'rew-3', userId: 'user-bintang', title: 'Nonton Film Bioskop Weekend', costCoins: 350, icon: 'Film', description: 'Nonton film premier di XXI / CGV', isClaimed: false, category: 'Entertainment', createdAt: '2026-08-01' },
+  { id: 'rew-4', userId: 'user-bintang', title: 'Beli Buku Baru / Audiobook', costCoins: 500, icon: 'BookOpen', description: 'Investasi ilmu dan pengembangan diri', isClaimed: false, category: 'Self Growth', createdAt: '2026-08-01' },
+  { id: 'rew-5', userId: 'user-bintang', title: 'Cheat Meal All-You-Can-Eat', costCoins: 800, icon: 'Utensils', description: 'Makan puas sepuasnya setelah konsisten gym 30 hari', isClaimed: false, category: 'Food & Drink', createdAt: '2026-08-01' },
+];
+
+export const INITIAL_AI_SETTINGS: import('../types').AISettings = {
+  geminiApiKey: '',
+  isGeminiActive: false,
+  customCoachPersona: 'Bijak, Empatis, Tegas, dan Berorientasi pada Pertumbuhan Diri',
+};
+

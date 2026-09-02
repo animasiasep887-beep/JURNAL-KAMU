@@ -5,6 +5,7 @@ import { WorkoutSet, WorkoutExerciseLog, Exercise } from '../../types';
 import { useNotification } from '../../context/NotificationContext';
 import { getTodayString } from '../../utils/formatters';
 import { ExerciseGuideModal } from './ExerciseGuideModal';
+import { GymCalculatorsModal } from './GymCalculatorsModal';
 import {
   Dumbbell,
   Plus,
@@ -20,6 +21,7 @@ import {
   Info,
   Flame,
   CheckCircle2,
+  Calculator,
 } from 'lucide-react';
 
 export const WorkoutLogger: React.FC = () => {
@@ -35,6 +37,7 @@ export const WorkoutLogger: React.FC = () => {
   const [restSeconds, setRestSeconds] = useState(90);
   const [isRestTimerRunning, setIsRestTimerRunning] = useState(false);
   const [showRestTimer, setShowRestTimer] = useState(false);
+  const [showCalculators, setShowCalculators] = useState(false);
 
   // Sets logging state
   const [sets, setSets] = useState<WorkoutSet[]>([
@@ -153,6 +156,15 @@ export const WorkoutLogger: React.FC = () => {
         <div className="flex items-center gap-2">
           <button
             type="button"
+            onClick={() => setShowCalculators(true)}
+            className="px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold text-xs rounded-xl flex items-center gap-1.5 transition-colors"
+          >
+            <Calculator className="w-4 h-4" />
+            <span>Kalkulator Plate & 1RM</span>
+          </button>
+
+          <button
+            type="button"
             onClick={() => setShowRestTimer(!showRestTimer)}
             className="px-3.5 py-2.5 bg-slate-800 hover:bg-slate-700 text-indigo-300 font-bold text-xs rounded-xl flex items-center gap-1.5 transition-colors"
           >
@@ -169,6 +181,8 @@ export const WorkoutLogger: React.FC = () => {
           </button>
         </div>
       </div>
+
+      <GymCalculatorsModal isOpen={showCalculators} onClose={() => setShowCalculators(false)} />
 
       {/* Beginner Helper Tip Banner */}
       <div className="p-3.5 bg-gradient-to-r from-indigo-950/60 to-slate-900 border border-indigo-500/20 rounded-2xl flex items-start gap-3 text-xs text-indigo-200">

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useData } from '../../context/DataContext';
 import { formatIDR, formatDateIndonesian, getTodayString } from '../../utils/formatters';
-import { Calendar, CreditCard, ArrowUpRight, ArrowDownLeft, ArrowRightLeft, Tag, Trash2, Plus, Filter, Wallet } from 'lucide-react';
+import { Calendar, CreditCard, ArrowUpRight, ArrowDownLeft, ArrowRightLeft, Tag, Trash2, Plus, Filter, Wallet, Camera } from 'lucide-react';
+import { ReceiptScannerModal } from './ReceiptScannerModal';
 
 export const DailyExpenseView: React.FC = () => {
   const { transactions, deleteTransaction } = useData();
   const [selectedDate, setSelectedDate] = useState(getTodayString());
   const [typeFilter, setTypeFilter] = useState<'all' | 'income' | 'expense' | 'transfer'>('all');
+  const [showReceiptScanner, setShowReceiptScanner] = useState(false);
 
   // Transactions on selected date
   const dateTxs = transactions.filter((t) => t.date === selectedDate);
@@ -39,6 +41,14 @@ export const DailyExpenseView: React.FC = () => {
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setShowReceiptScanner(true)}
+            className="flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white text-xs font-bold rounded-xl shadow-lg shadow-indigo-600/20 transition-all cursor-pointer"
+          >
+            <Camera className="w-3.5 h-3.5" />
+            <span>Scan Struk (OCR)</span>
+          </button>
           <Calendar className="w-4 h-4 text-slate-400 hidden sm:block" />
           <input
             type="date"
@@ -48,6 +58,8 @@ export const DailyExpenseView: React.FC = () => {
           />
         </div>
       </div>
+
+      <ReceiptScannerModal isOpen={showReceiptScanner} onClose={() => setShowReceiptScanner(false)} />
 
       {/* Metrics Row: Income, Expense, Net Cashflow */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

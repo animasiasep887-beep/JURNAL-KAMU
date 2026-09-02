@@ -57,6 +57,11 @@ const KEYS = {
   AUDIT_LOGS: 'lifeos_audit_logs',
   COUPONS: 'lifeos_coupons',
   SUBSCRIPTIONS: 'lifeos_subscriptions',
+  RECURRING_SUBS: 'lifeos_recurring_subs',
+  DEBTS: 'lifeos_debts',
+  REWARDS: 'lifeos_rewards',
+  POMODORO_LOGS: 'lifeos_pomodoro_logs',
+  AI_SETTINGS: 'lifeos_ai_settings',
   PIN_LOCKED: 'lifeos_pin_locked',
 };
 
@@ -130,6 +135,21 @@ export const storage = {
   getSubscriptions: (): SubscriptionHistoryItem[] => getItem(KEYS.SUBSCRIPTIONS, INITIAL_SUBSCRIPTION_HISTORY),
   setSubscriptions: (sub: SubscriptionHistoryItem[]) => setItem(KEYS.SUBSCRIPTIONS, sub),
 
+  getRecurringSubscriptions: () => getItem(KEYS.RECURRING_SUBS, []),
+  setRecurringSubscriptions: (subs: any[]) => setItem(KEYS.RECURRING_SUBS, subs),
+
+  getDebts: () => getItem(KEYS.DEBTS, []),
+  setDebts: (debts: any[]) => setItem(KEYS.DEBTS, debts),
+
+  getRewards: () => getItem(KEYS.REWARDS, []),
+  setRewards: (rewards: any[]) => setItem(KEYS.REWARDS, rewards),
+
+  getPomodoroLogs: () => getItem(KEYS.POMODORO_LOGS, []),
+  setPomodoroLogs: (logs: any[]) => setItem(KEYS.POMODORO_LOGS, logs),
+
+  getAISettings: () => getItem(KEYS.AI_SETTINGS, { geminiApiKey: '', isGeminiActive: false }),
+  setAISettings: (settings: any) => setItem(KEYS.AI_SETTINGS, settings),
+
   getPinLocked: (): boolean => getItem(KEYS.PIN_LOCKED, false),
   setPinLocked: (locked: boolean) => setItem(KEYS.PIN_LOCKED, locked),
 
@@ -148,6 +168,10 @@ export const storage = {
       goals: storage.getGoals(),
       achievements: storage.getAchievements(),
       telegram: storage.getTelegram(),
+      recurringSubs: storage.getRecurringSubscriptions(),
+      debts: storage.getDebts(),
+      rewards: storage.getRewards(),
+      aiSettings: storage.getAISettings(),
       exportedAt: new Date().toISOString(),
     };
     return JSON.stringify(backup, null, 2);
@@ -167,6 +191,10 @@ export const storage = {
       if (data.habits) storage.setHabits(data.habits);
       if (data.habitLogs) storage.setHabitLogs(data.habitLogs);
       if (data.goals) storage.setGoals(data.goals);
+      if (data.recurringSubs) storage.setRecurringSubscriptions(data.recurringSubs);
+      if (data.debts) storage.setDebts(data.debts);
+      if (data.rewards) storage.setRewards(data.rewards);
+      if (data.aiSettings) storage.setAISettings(data.aiSettings);
       return true;
     } catch (e) {
       console.error('Failed to restore backup JSON', e);

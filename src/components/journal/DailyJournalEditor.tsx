@@ -40,6 +40,7 @@ import {
   ChevronRight,
   Share2,
 } from 'lucide-react';
+import { VoiceJournalButton } from './VoiceJournalButton';
 
 interface DailyJournalEditorProps {
   initialZenMode?: boolean;
@@ -972,6 +973,13 @@ export const DailyJournalEditor: React.FC<DailyJournalEditorProps> = ({ initialZ
             <div className="flex items-center justify-between mb-1.5">
               <label className="text-xs font-semibold text-slate-300">Isi Jurnal / Curahan Pikiran</label>
               <div className="flex items-center gap-2">
+                <VoiceJournalButton
+                  onTranscript={(speechText) => {
+                    setContent((prev) => (prev ? `${prev} ${speechText}` : speechText));
+                    showToast('🎙️ Suara berhasil dikonversi ke teks!', 'success');
+                  }}
+                  label="Dikte Suara"
+                />
                 <button
                   type="button"
                   onClick={() => insertMarkdown('###')}

@@ -1,12 +1,17 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useData } from '../../context/DataContext';
 import { useAuth } from '../../context/AuthContext';
 import { calculateJournalStreak } from '../../utils/formatters';
-import { Trophy, Flame, Zap, Award, Sparkles, Star, ChevronRight } from 'lucide-react';
+import { Trophy, Flame, Zap, Award, Sparkles, Star, ChevronRight, Gift, Share2 } from 'lucide-react';
+import { RewardShopModal } from './RewardShopModal';
+import { ShareableCardModal } from './ShareableCardModal';
 
 export const UserLevelCard: React.FC = () => {
   const { journals, workouts, tasks, transactions } = useData();
   const { currentUser } = useAuth();
+
+  const [showRewardShop, setShowRewardShop] = useState(false);
+  const [showStoryCard, setShowStoryCard] = useState(false);
 
   const streak = useMemo(() => calculateJournalStreak(journals), [journals]);
 
@@ -19,8 +24,6 @@ export const UserLevelCard: React.FC = () => {
 
     const xp = journalXP + workoutXP + taskXP + txXP + streakBonus;
 
-    // Levels: 100 XP per level tier
-    // Lv 1: 0-150, Lv 2: 150-350, Lv 3: 350-650, Lv 4: 650-1050, Lv 5: 1050-1600...
     let lvl = 1;
     let base = 0;
     let next = 150;
@@ -97,30 +100,56 @@ export const UserLevelCard: React.FC = () => {
           </div>
         </div>
 
-        {/* Progress Bar & Next Level Info */}
-        <div className="flex-1 max-w-md w-full">
-          <div className="flex justify-between items-center text-xs font-semibold mb-1.5">
-            <span className="text-slate-300 flex items-center gap-1">
-              <Zap className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
-              <span>Progress Level {level + 1}</span>
-            </span>
-            <span className="text-slate-400 font-mono">{progressToNext}%</span>
+        {/* Progress Bar & Actions */}
+        <div className="flex-1 max-w-md w-full space-y-3">
+          <div>
+            <div className="flex justify-between items-center text-xs font-semibold mb-1.5">
+              <span className="text-slate-300 flex items-center gap-1">
+                <Zap className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
+                <span>Progress Level {level + 1}</span>
+              </span>
+              <span className="text-slate-400 font-mono">{progressToNext}%</span>
+            </div>
+
+            {/* Glowing Animated Bar */}
+            <div className="w-full h-3 bg-slate-950 rounded-full overflow-hidden border border-slate-800 p-0.5">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-md shadow-indigo-500/50 transition-all duration-500"
+                style={{ width: `${progressToNext}%` }}
+              />
+            </div>
+
+            <div className="flex justify-between text-[11px] text-slate-400 mt-1 font-mono">
+              <span>{totalXP} XP</span>
+              <span>Target: {nextLevelXP} XP</span>
+            </div>
           </div>
 
-          {/* Glowing Animated Bar */}
-          <div className="w-full h-3 bg-slate-950 rounded-full overflow-hidden border border-slate-800 p-0.5">
-            <div
-              className="h-full rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-md shadow-indigo-500/50 transition-all duration-500"
-              style={{ width: `${progressToNext}%` }}
-            />
-          </div>
+          {/* Action Buttons: XP Shop & Share Story */}
+          <div className="flex items-center gap-2 pt-1">
+            <button
+              type="button"
+              onClick={() => setShowRewardShop(true)}
+              className="flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-amber-500/20 to-orange-500/20 hover:from-amber-500/30 hover:to-orange-500/30 text-amber-300 border border-amber-500/30 rounded-xl text-xs font-bold transition-all shadow-sm"
+            >
+              <Gift className="w-3.5 h-3.5 text-amber-400" />
+              <span>XP Reward Shop</span>
+            </button>
 
-          <div className="flex justify-between text-[11px] text-slate-400 mt-1 font-mono">
-            <span>{totalXP} XP</span>
-            <span>Target: {nextLevelXP} XP</span>
+            <button
+              type="button"
+              onClick={() => setShowStoryCard(true)}
+              className="flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700 rounded-xl text-xs font-bold transition-all"
+            >
+              <Share2 className="w-3.5 h-3.5 text-indigo-400" />
+              <span>Share Story Card</span>
+            </button>
           </div>
         </div>
       </div>
+
+      <RewardShopModal isOpen={showRewardShop} onClose={() => setShowRewardShop(false)} />
+      <ShareableCardModal isOpen={showStoryCard} onClose={() => setShowStoryCard(false)} />
     </div>
   );
 };

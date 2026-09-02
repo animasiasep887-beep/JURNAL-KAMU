@@ -26,6 +26,7 @@ import { MoneyFlowChart } from './components/finance/MoneyFlowChart';
 import { NetWorthView } from './components/finance/NetWorthView';
 import { FinancialHealthScore } from './components/finance/FinancialHealthScore';
 import { FinancialRunwaySimulator } from './components/finance/FinancialRunwaySimulator';
+import { SubscriptionDebtTracker } from './components/finance/SubscriptionDebtTracker';
 
 import { TelegramSimulator } from './components/telegram/TelegramSimulator';
 import { TelegramSettings } from './components/telegram/TelegramSettings';
@@ -34,6 +35,7 @@ import { DailyJournalEditor } from './components/journal/DailyJournalEditor';
 import { ActivityLogger } from './components/journal/ActivityLogger';
 
 import { TaskManager } from './components/tasks/TaskManager';
+import { PomodoroTimer } from './components/tasks/PomodoroTimer';
 import { IntegratedCalendar } from './components/calendar/IntegratedCalendar';
 
 import { ExerciseDatabase } from './components/gym/ExerciseDatabase';
@@ -79,6 +81,14 @@ const MainLayout: React.FC = () => {
   const [showCommandPalette, setShowCommandPalette] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedAdminUser, setSelectedAdminUser] = useState<User | null>(null);
+
+  // Sub-tabs for clean, non-overwhelming navigation
+  const [dashboardSubTab, setDashboardSubTab] = useState<'daily' | 'gamification' | 'timeline'>('daily');
+  const [financeSubTab, setFinanceSubTab] = useState<'transactions' | 'subs' | 'budgets' | 'simulations'>('transactions');
+  const [gymSubTab, setGymSubTab] = useState<'logger' | 'charts' | 'database'>('logger');
+  const [journalSubTab, setJournalSubTab] = useState<'editor' | 'activities'>('editor');
+  const [tasksSubTab, setTasksSubTab] = useState<'list' | 'pomodoro'>('list');
+  const [settingsSubTab, setSettingsSubTab] = useState<'profile' | 'membership' | 'backup'>('profile');
 
   // Global Ctrl+K / Cmd+K listener
   React.useEffect(() => {
@@ -185,38 +195,209 @@ const MainLayout: React.FC = () => {
           {/* TAB 1: DASHBOARD UTAMA */}
           {activeTab === 'dashboard' && (
             <div className="space-y-6">
-              {/* Gamification Level Card */}
-              <UserLevelCard />
-              
-              <OverviewCards />
-              <DailyScoreCard />
-              
-              {/* Weekly AI Life Review */}
-              <WeeklyLifeReview />
+              {/* Beginner-Friendly Quick Action Cards */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveTab('finance');
+                    setFinanceSubTab('transactions');
+                  }}
+                  className="p-4 bg-gradient-to-br from-emerald-950/40 via-slate-900 to-slate-900 border border-emerald-500/30 hover:border-emerald-500/60 rounded-2xl text-left transition-all group hover:scale-[1.02] shadow-lg shadow-emerald-950/20"
+                >
+                  <span className="text-xl sm:text-2xl block mb-1.5 group-hover:scale-110 transition-transform">💰</span>
+                  <div className="font-extrabold text-xs sm:text-sm text-white">Catat Uang</div>
+                  <p className="text-[11px] text-slate-400 mt-0.5 line-clamp-1">Pemasukan, pengeluaran & struk</p>
+                </button>
 
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveTab('journal');
+                    setJournalSubTab('editor');
+                  }}
+                  className="p-4 bg-gradient-to-br from-indigo-950/40 via-slate-900 to-slate-900 border border-indigo-500/30 hover:border-indigo-500/60 rounded-2xl text-left transition-all group hover:scale-[1.02] shadow-lg shadow-indigo-950/20"
+                >
+                  <span className="text-xl sm:text-2xl block mb-1.5 group-hover:scale-110 transition-transform">✍️</span>
+                  <div className="font-extrabold text-xs sm:text-sm text-white">Tulis Jurnal</div>
+                  <p className="text-[11px] text-slate-400 mt-0.5 line-clamp-1">Refleksi harian & dikte suara</p>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveTab('tasks');
+                    setTasksSubTab('list');
+                  }}
+                  className="p-4 bg-gradient-to-br from-purple-950/40 via-slate-900 to-slate-900 border border-purple-500/30 hover:border-purple-500/60 rounded-2xl text-left transition-all group hover:scale-[1.02] shadow-lg shadow-purple-950/20"
+                >
+                  <span className="text-xl sm:text-2xl block mb-1.5 group-hover:scale-110 transition-transform">🎯</span>
+                  <div className="font-extrabold text-xs sm:text-sm text-white">Target To-Do</div>
+                  <p className="text-[11px] text-slate-400 mt-0.5 line-clamp-1">Tugas & timer fokus kerja</p>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActiveTab('gym');
+                    setGymSubTab('logger');
+                  }}
+                  className="p-4 bg-gradient-to-br from-rose-950/40 via-slate-900 to-slate-900 border border-rose-500/30 hover:border-rose-500/60 rounded-2xl text-left transition-all group hover:scale-[1.02] shadow-lg shadow-rose-950/20"
+                >
+                  <span className="text-xl sm:text-2xl block mb-1.5 group-hover:scale-110 transition-transform">🏋️</span>
+                  <div className="font-extrabold text-xs sm:text-sm text-white">Latihan Gym</div>
+                  <p className="text-[11px] text-slate-400 mt-0.5 line-clamp-1">Catat set & rest timer</p>
+                </button>
+              </div>
+
+              {/* Dashboard Sub-Tabs */}
+              <div className="flex bg-slate-900 p-1.5 rounded-2xl border border-slate-800 text-xs gap-1">
+                <button
+                  type="button"
+                  onClick={() => setDashboardSubTab('daily')}
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    dashboardSubTab === 'daily'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  ⚡ Skor & Ringkasan Hari Ini
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDashboardSubTab('gamification')}
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    dashboardSubTab === 'gamification'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  🎮 Level XP & Refleksi AI
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDashboardSubTab('timeline')}
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    dashboardSubTab === 'timeline'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  ⏱️ Timeline Waktu
+                </button>
+              </div>
+
+              {dashboardSubTab === 'daily' && (
+                <div className="space-y-6 animate-fade-in">
+                  <DailyScoreCard />
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <FinancialSummaryCard onNavigateToFinance={() => {
+                      setActiveTab('finance');
+                      setFinanceSubTab('transactions');
+                    }} />
+                    <WorkoutQuickSummary onNavigateToGym={() => {
+                      setActiveTab('gym');
+                      setGymSubTab('logger');
+                    }} />
+                  </div>
+                </div>
+              )}
+
+              {dashboardSubTab === 'gamification' && (
+                <div className="space-y-6 animate-fade-in">
+                  <UserLevelCard />
+                  <OverviewCards />
+                  <WeeklyLifeReview />
+                </div>
+              )}
+
+              {dashboardSubTab === 'timeline' && (
+                <div className="space-y-6 animate-fade-in">
                   <TodayTimeline />
                 </div>
-                <div className="space-y-6">
-                  <FinancialSummaryCard onNavigateToFinance={() => setActiveTab('finance')} />
-                  <WorkoutQuickSummary onNavigateToGym={() => setActiveTab('gym')} />
-                </div>
-              </div>
+              )}
             </div>
           )}
 
           {/* TAB 2: FINANCE */}
           {activeTab === 'finance' && (
             <div className="space-y-6">
-              <AccountManager />
-              <FinancialRunwaySimulator />
-              <FinancialHealthScore />
-              <DailyExpenseView />
-              <TransactionList />
-              <BudgetManager />
-              <MoneyFlowChart />
-              <NetWorthView />
+              {/* Finance Sub-Tabs Navigation Bar */}
+              <div className="flex flex-wrap bg-slate-900 p-1.5 rounded-2xl border border-slate-800 text-xs gap-1">
+                <button
+                  type="button"
+                  onClick={() => setFinanceSubTab('transactions')}
+                  className={`flex-1 min-w-[140px] py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    financeSubTab === 'transactions'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  💳 Transaksi & Dompet
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFinanceSubTab('subs')}
+                  className={`flex-1 min-w-[140px] py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    financeSubTab === 'subs'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  🔄 Langganan & Hutang
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFinanceSubTab('budgets')}
+                  className={`flex-1 min-w-[140px] py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    financeSubTab === 'budgets'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  🎯 Anggaran & Skor Sehat
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFinanceSubTab('simulations')}
+                  className={`flex-1 min-w-[140px] py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    financeSubTab === 'simulations'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  📈 Simulasi & Net Worth
+                </button>
+              </div>
+
+              {financeSubTab === 'transactions' && (
+                <div className="space-y-6 animate-fade-in">
+                  <AccountManager />
+                  <DailyExpenseView />
+                  <TransactionList />
+                </div>
+              )}
+
+              {financeSubTab === 'subs' && (
+                <div className="space-y-6 animate-fade-in">
+                  <SubscriptionDebtTracker />
+                </div>
+              )}
+
+              {financeSubTab === 'budgets' && (
+                <div className="space-y-6 animate-fade-in">
+                  <FinancialHealthScore />
+                  <BudgetManager />
+                </div>
+              )}
+
+              {financeSubTab === 'simulations' && (
+                <div className="space-y-6 animate-fade-in">
+                  <FinancialRunwaySimulator />
+                  <MoneyFlowChart />
+                  <NetWorthView />
+                </div>
+              )}
             </div>
           )}
 
@@ -235,8 +416,42 @@ const MainLayout: React.FC = () => {
           {/* TAB 4: DAILY JOURNAL */}
           {activeTab === 'journal' && (
             <div className="space-y-6">
-              <DailyJournalEditor />
-              <ActivityLogger />
+              <div className="flex bg-slate-900 p-1.5 rounded-2xl border border-slate-800 text-xs gap-1">
+                <button
+                  type="button"
+                  onClick={() => setJournalSubTab('editor')}
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    journalSubTab === 'editor'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  ✍️ Tulis Jurnal Harian & Suara
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setJournalSubTab('activities')}
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    journalSubTab === 'activities'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  ⏱️ Log Aktivitas Waktu
+                </button>
+              </div>
+
+              {journalSubTab === 'editor' && (
+                <div className="space-y-6 animate-fade-in">
+                  <DailyJournalEditor />
+                </div>
+              )}
+
+              {journalSubTab === 'activities' && (
+                <div className="space-y-6 animate-fade-in">
+                  <ActivityLogger />
+                </div>
+              )}
             </div>
           )}
 
@@ -251,7 +466,42 @@ const MainLayout: React.FC = () => {
           {/* TAB 6: TASKS & PLANNER */}
           {activeTab === 'tasks' && (
             <div className="space-y-6">
-              <TaskManager />
+              <div className="flex bg-slate-900 p-1.5 rounded-2xl border border-slate-800 text-xs gap-1">
+                <button
+                  type="button"
+                  onClick={() => setTasksSubTab('list')}
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    tasksSubTab === 'list'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  📋 Daftar Tugas & Prioritas
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTasksSubTab('pomodoro')}
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    tasksSubTab === 'pomodoro'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  ⏱️ Focus Timer (Pomodoro & Soundscape)
+                </button>
+              </div>
+
+              {tasksSubTab === 'list' && (
+                <div className="space-y-6 animate-fade-in">
+                  <TaskManager />
+                </div>
+              )}
+
+              {tasksSubTab === 'pomodoro' && (
+                <div className="space-y-6 animate-fade-in">
+                  <PomodoroTimer />
+                </div>
+              )}
             </div>
           )}
 
@@ -265,9 +515,59 @@ const MainLayout: React.FC = () => {
           {/* TAB 8: GYM JOURNAL */}
           {activeTab === 'gym' && (
             <div className="space-y-6">
-              <WorkoutLogger />
-              <GymProgressCharts />
-              <ExerciseDatabase />
+              <div className="flex bg-slate-900 p-1.5 rounded-2xl border border-slate-800 text-xs gap-1">
+                <button
+                  type="button"
+                  onClick={() => setGymSubTab('logger')}
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    gymSubTab === 'logger'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  📝 Catat Latihan & Timer
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setGymSubTab('charts')}
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    gymSubTab === 'charts'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  📈 Grafik Progres Beban
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setGymSubTab('database')}
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    gymSubTab === 'database'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  📚 Panduan Gerakan
+                </button>
+              </div>
+
+              {gymSubTab === 'logger' && (
+                <div className="space-y-6 animate-fade-in">
+                  <WorkoutLogger />
+                </div>
+              )}
+
+              {gymSubTab === 'charts' && (
+                <div className="space-y-6 animate-fade-in">
+                  <GymProgressCharts />
+                </div>
+              )}
+
+              {gymSubTab === 'database' && (
+                <div className="space-y-6 animate-fade-in">
+                  <ExerciseDatabase />
+                </div>
+              )}
             </div>
           )}
 
@@ -316,9 +616,59 @@ const MainLayout: React.FC = () => {
           {/* TAB 15: SETTINGS */}
           {activeTab === 'settings' && (
             <div className="space-y-6">
-              <UserProfileSettings />
-              <MembershipPage />
-              <DataExportBackup />
+              <div className="flex bg-slate-900 p-1.5 rounded-2xl border border-slate-800 text-xs gap-1">
+                <button
+                  type="button"
+                  onClick={() => setSettingsSubTab('profile')}
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    settingsSubTab === 'profile'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  👤 Profil & AI Gemini
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSettingsSubTab('membership')}
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    settingsSubTab === 'membership'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  👑 Status Paket
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSettingsSubTab('backup')}
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    settingsSubTab === 'backup'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  💾 Backup & Ekspor
+                </button>
+              </div>
+
+              {settingsSubTab === 'profile' && (
+                <div className="space-y-6 animate-fade-in">
+                  <UserProfileSettings />
+                </div>
+              )}
+
+              {settingsSubTab === 'membership' && (
+                <div className="space-y-6 animate-fade-in">
+                  <MembershipPage />
+                </div>
+              )}
+
+              {settingsSubTab === 'backup' && (
+                <div className="space-y-6 animate-fade-in">
+                  <DataExportBackup />
+                </div>
+              )}
             </div>
           )}
 

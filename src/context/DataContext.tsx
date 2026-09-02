@@ -20,7 +20,13 @@ import type {
 } from '../types';
 import type { TelegramBotMessage, ParsedTelegramExpense } from '../types/telegram';
 import { storage } from '../utils/storage';
-import { INITIAL_TELEGRAM_INTEGRATION } from '../utils/initialData';
+import {
+  INITIAL_TELEGRAM_INTEGRATION,
+  INITIAL_RECURRING_SUBSCRIPTIONS,
+  INITIAL_DEBTS,
+  INITIAL_REWARDS,
+  INITIAL_AI_SETTINGS,
+} from '../utils/initialData';
 import { useAuth } from './AuthContext';
 import { parseTelegramMessage } from '../utils/telegramParser';
 import { getTodayString } from '../utils/formatters';
@@ -129,6 +135,38 @@ export interface DataContextType {
   auditLogs: SystemAuditLog[];
   addAuditLog: (action: string, details?: string) => void;
 
+  // Recurring Subscriptions
+  recurringSubs: import('../types').RecurringSubscription[];
+  addRecurringSub: (sub: Omit<import('../types').RecurringSubscription, 'id' | 'userId' | 'createdAt'>) => void;
+  updateRecurringSub: (id: string, updated: Partial<import('../types').RecurringSubscription>) => void;
+  deleteRecurringSub: (id: string) => void;
+
+  // Debts & Receivables
+  debts: import('../types').DebtItem[];
+  addDebt: (debt: Omit<import('../types').DebtItem, 'id' | 'userId' | 'createdAt' | 'updatedAt'>) => void;
+  updateDebt: (id: string, updated: Partial<import('../types').DebtItem>) => void;
+  deleteDebt: (id: string) => void;
+  recordDebtPayment: (id: string, paymentAmount: number) => void;
+
+  // Personal Rewards Gamification Shop
+  rewards: import('../types').PersonalReward[];
+  addReward: (reward: Omit<import('../types').PersonalReward, 'id' | 'userId' | 'createdAt'>) => void;
+  claimReward: (id: string) => boolean;
+  deleteReward: (id: string) => void;
+
+  // Pomodoro Focus Tracker
+  pomodoroLogs: import('../types').PomodoroLog[];
+  logPomodoroSession: (session: Omit<import('../types').PomodoroLog, 'id' | 'userId' | 'completedAt'>) => void;
+
+  // AI BYOK Settings
+  aiSettings: import('../types').AISettings;
+  updateAISettings: (settings: Partial<import('../types').AISettings>) => void;
+
+  // Cloud & Telegram Server Sync
+  syncWithServer: () => Promise<boolean>;
+  isSyncing: boolean;
+  lastSyncedAt: string | null;
+
   // Fast Bulk Exporter / Backup
   exportAllData: () => string;
   exportBackup: () => string;
@@ -167,6 +205,27 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [coupons, setCoupons] = useState<Coupon[]>(() => storage.getCoupons());
   const [subscriptions, setSubscriptions] = useState<SubscriptionHistoryItem[]>(() => storage.getSubscriptions());
 
+  const [allRecurringSubs, setAllRecurringSubs] = useState<import('../types').RecurringSubscription[]>(() => {
+    const s = storage.getRecurringSubscriptions();
+    return s && s.length > 0 ? s : INITIAL_RECURRING_SUBSCRIPTIONS;
+  });
+
+  const [allDebts, setAllDebts] = useState<import('../types').DebtItem[]>(() => {
+    const d = storage.getDebts();
+    return d && d.length > 0 ? d : INITIAL_DEBTS;
+  });
+
+  const [allRewards, setAllRewards] = useState<import('../types').PersonalReward[]>(() => {
+    const r = storage.getRewards();
+    return r && r.length > 0 ? r : INITIAL_REWARDS;
+  });
+
+  const [allPomodoroLogs, setAllPomodoroLogs] = useState<import('../types').PomodoroLog[]>(() => storage.getPomodoroLogs());
+  const [aiSettings, setAiSettings] = useState<import('../types').AISettings>(() => storage.getAISettings() || INITIAL_AI_SETTINGS);
+
+  const [isSyncing, setIsSyncing] = useState<boolean>(false);
+  const [lastSyncedAt, setLastSyncedAt] = useState<string | null>(null);
+
   // Persistence effects
   useEffect(() => storage.setAccounts(allAccounts), [allAccounts]);
   useEffect(() => storage.setTransactions(allTransactions), [allTransactions]);
@@ -182,6 +241,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => storage.setAuditLogs(auditLogs), [auditLogs]);
   useEffect(() => storage.setCoupons(coupons), [coupons]);
   useEffect(() => storage.setSubscriptions(subscriptions), [subscriptions]);
+  useEffect(() => storage.setRecurringSubscriptions(allRecurringSubs), [allRecurringSubs]);
+  useEffect(() => storage.setDebts(allDebts), [allDebts]);
+  useEffect(() => storage.setRewards(allRewards), [allRewards]);
+  useEffect(() => storage.setPomodoroLogs(allPomodoroLogs), [allPomodoroLogs]);
+  useEffect(() => storage.setAISettings(aiSettings), [aiSettings]);
 
   const [dbBindings, setDbBindings] = useState<Record<string, any>>({});
 
@@ -878,6 +942,151 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setAuditLogs((prev) => [newLog, ...prev]);
   };
 
+  // Filtered user slices
+  const userRecurringSubs = useMemo(() => allRecurringSubs.filter((s) => s.userId === userId || !s.userId), [allRecurringSubs, userId]);
+  const userDebts = useMemo(() => allDebts.filter((d) => d.userId === userId || !d.userId), [allDebts, userId]);
+  const userRewards = useMemo(() => allRewards.filter((r) => r.userId === userId || !r.userId), [allRewards, userId]);
+  const userPomodoroLogs = useMemo(() => allPomodoroLogs.filter((p) => p.userId === userId || !p.userId), [allPomodoroLogs, userId]);
+
+  // Recurring Subscriptions Handlers
+  const addRecurringSub = (sub: Omit<import('../types').RecurringSubscription, 'id' | 'userId' | 'createdAt'>) => {
+    const newSub: import('../types').RecurringSubscription = {
+      ...sub,
+      id: `sub-${Date.now()}`,
+      userId,
+      createdAt: getTodayString(),
+    };
+    setAllRecurringSubs((prev) => [newSub, ...prev]);
+  };
+
+  const updateRecurringSub = (id: string, updated: Partial<import('../types').RecurringSubscription>) => {
+    setAllRecurringSubs((prev) => prev.map((s) => (s.id === id ? { ...s, ...updated } : s)));
+  };
+
+  const deleteRecurringSub = (id: string) => {
+    setAllRecurringSubs((prev) => prev.filter((s) => s.id !== id));
+  };
+
+  // Debts & Receivables Handlers
+  const addDebt = (debt: Omit<import('../types').DebtItem, 'id' | 'userId' | 'createdAt' | 'updatedAt'>) => {
+    const newDebt: import('../types').DebtItem = {
+      ...debt,
+      id: `debt-${Date.now()}`,
+      userId,
+      createdAt: getTodayString(),
+      updatedAt: new Date().toISOString(),
+    };
+    setAllDebts((prev) => [newDebt, ...prev]);
+  };
+
+  const updateDebt = (id: string, updated: Partial<import('../types').DebtItem>) => {
+    setAllDebts((prev) => prev.map((d) => (d.id === id ? { ...d, ...updated, updatedAt: new Date().toISOString() } : d)));
+  };
+
+  const deleteDebt = (id: string) => {
+    setAllDebts((prev) => prev.filter((d) => d.id !== id));
+  };
+
+  const recordDebtPayment = (id: string, paymentAmount: number) => {
+    setAllDebts((prev) =>
+      prev.map((d) => {
+        if (d.id === id) {
+          const newPaid = Math.min(d.amount, (d.paidAmount || 0) + paymentAmount);
+          const newStatus = newPaid >= d.amount ? 'settled' : 'partial';
+          return { ...d, paidAmount: newPaid, status: newStatus, updatedAt: new Date().toISOString() };
+        }
+        return d;
+      })
+    );
+  };
+
+  // Rewards Gamification Handlers
+  const addReward = (reward: Omit<import('../types').PersonalReward, 'id' | 'userId' | 'createdAt'>) => {
+    const newReward: import('../types').PersonalReward = {
+      ...reward,
+      id: `rew-${Date.now()}`,
+      userId,
+      isClaimed: false,
+      createdAt: getTodayString(),
+    };
+    setAllRewards((prev) => [newReward, ...prev]);
+  };
+
+  const claimReward = (id: string): boolean => {
+    let claimed = false;
+    setAllRewards((prev) =>
+      prev.map((r) => {
+        if (r.id === id && !r.isClaimed) {
+          claimed = true;
+          return { ...r, isClaimed: true, claimedAt: new Date().toISOString() };
+        }
+        return r;
+      })
+    );
+    return claimed;
+  };
+
+  const deleteReward = (id: string) => {
+    setAllRewards((prev) => prev.filter((r) => r.id !== id));
+  };
+
+  // Pomodoro Focus Handlers
+  const logPomodoroSession = (session: Omit<import('../types').PomodoroLog, 'id' | 'userId' | 'completedAt'>) => {
+    const newLog: import('../types').PomodoroLog = {
+      ...session,
+      id: `pom-${Date.now()}`,
+      userId,
+      completedAt: new Date().toISOString(),
+    };
+    setAllPomodoroLogs((prev) => [newLog, ...prev]);
+  };
+
+  // AI Settings
+  const updateAISettings = (settings: Partial<import('../types').AISettings>) => {
+    setAiSettings((prev) => {
+      const updated = { ...prev, ...settings };
+      storage.setAISettings(updated);
+      return updated;
+    });
+  };
+
+  // Cloud & Telegram Server Bidirectional Sync
+  const syncWithServer = async (): Promise<boolean> => {
+    setIsSyncing(true);
+    try {
+      const payload = {
+        userId,
+        transactions: allTransactions,
+        journals: allJournals,
+        tasks: allTasks,
+        workouts: allWorkouts,
+      };
+
+      const res = await fetch('/api/sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        const result = await res.json();
+        if (result.success && result.merged) {
+          if (Array.isArray(result.merged.transactions)) setAllTransactions(result.merged.transactions);
+          if (Array.isArray(result.merged.journals)) setAllJournals(result.merged.journals);
+          if (Array.isArray(result.merged.tasks)) setAllTasks(result.merged.tasks);
+          if (Array.isArray(result.merged.workouts)) setAllWorkouts(result.merged.workouts);
+        }
+        setLastSyncedAt(new Date().toLocaleTimeString('id-ID'));
+        setIsSyncing(false);
+        return true;
+      }
+    } catch (e) {
+      console.warn('Silent sync fallback to local storage:', e);
+    }
+    setIsSyncing(false);
+    return false;
+  };
+
   // Fast Export / Backup
   const exportAllData = (): string => {
     const data = {
@@ -890,6 +1099,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       workouts: userWorkouts,
       habits: userHabits,
       goals: userGoals,
+      recurringSubs: userRecurringSubs,
+      debts: userDebts,
+      rewards: userRewards,
+      aiSettings,
     };
     return JSON.stringify(data, null, 2);
   };
@@ -968,6 +1181,32 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         auditLogs,
         addAuditLog,
+
+        recurringSubs: userRecurringSubs,
+        addRecurringSub,
+        updateRecurringSub,
+        deleteRecurringSub,
+
+        debts: userDebts,
+        addDebt,
+        updateDebt,
+        deleteDebt,
+        recordDebtPayment,
+
+        rewards: userRewards,
+        addReward,
+        claimReward,
+        deleteReward,
+
+        pomodoroLogs: userPomodoroLogs,
+        logPomodoroSession,
+
+        aiSettings,
+        updateAISettings,
+
+        syncWithServer,
+        isSyncing,
+        lastSyncedAt,
 
         exportAllData,
         exportBackup,

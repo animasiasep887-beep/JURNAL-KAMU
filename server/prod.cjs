@@ -78,6 +78,90 @@ function handleRequest(req, res) {
       }
     }
 
+    // 1.5 API: /api/sync (Bidirectional Web <-> Telegram Bot Sync)
+    if (pathname === '/api/sync') {
+      if (req.method === 'GET') {
+        try {
+          const userId = parsedUrl.searchParams.get('userId');
+          if (fs.existsSync(DB_PATH)) {
+            const db = JSON.parse(fs.readFileSync(DB_PATH, 'utf8') || '{}');
+            let resData = db;
+            if (userId) {
+              resData = {
+                transactions: (db.transactions || []).filter(t => t.userId === userId || !t.userId),
+                journals: (db.journals || []).filter(j => j.userId === userId || !j.userId),
+                tasks: (db.tasks || []).filter(t => t.userId === userId || !t.userId),
+                workouts: (db.workouts || []).filter(w => w.userId === userId || !w.userId),
+                bindings: db.bindings || {},
+                codes: db.codes || {}
+              };
+            }
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            return res.end(JSON.stringify({ success: true, data: resData }));
+          }
+        } catch (e) {
+          console.error('Error in GET /api/sync:', e);
+        }
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ success: true, data: { transactions: [], journals: [], tasks: [], workouts: [] } }));
+      }
+
+      if (req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => body += chunk);
+        req.on('end', () => {
+          try {
+            const clientData = JSON.parse(body || '{}');
+            if (fs.existsSync(DB_PATH)) {
+              const db = JSON.parse(fs.readFileSync(DB_PATH, 'utf8') || '{}');
+              
+              // Helper to merge arrays by unique 'id'
+              const mergeById = (existingArr = [], newArr = []) => {
+                const map = new Map();
+                existingArr.forEach(item => { if (item && item.id) map.set(item.id, item); });
+                newArr.forEach(item => { if (item && item.id) map.set(item.id, item); });
+                return Array.from(map.values());
+              };
+
+              if (Array.isArray(clientData.transactions)) {
+                db.transactions = mergeById(db.transactions, clientData.transactions);
+              }
+              if (Array.isArray(clientData.journals)) {
+                db.journals = mergeById(db.journals, clientData.journals);
+              }
+              if (Array.isArray(clientData.tasks)) {
+                db.tasks = mergeById(db.tasks, clientData.tasks);
+              }
+              if (Array.isArray(clientData.workouts)) {
+                db.workouts = mergeById(db.workouts, clientData.workouts);
+              }
+              if (clientData.userSummaries && clientData.userId) {
+                if (!db.userSummaries) db.userSummaries = {};
+                db.userSummaries[clientData.userId] = clientData.userSummaries;
+              }
+
+              fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
+              res.writeHead(200, { 'Content-Type': 'application/json' });
+              return res.end(JSON.stringify({
+                success: true,
+                merged: {
+                  transactions: db.transactions,
+                  journals: db.journals,
+                  tasks: db.tasks,
+                  workouts: db.workouts
+                }
+              }));
+            }
+          } catch (e) {
+            console.error('Error in POST /api/sync:', e);
+          }
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          return res.end(JSON.stringify({ success: false, error: 'Sync failed' }));
+        });
+        return;
+      }
+    }
+
     // 2. API: /api/sync-user-summary
     if (pathname === '/api/sync-user-summary' && req.method === 'POST') {
       let body = '';

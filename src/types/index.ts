@@ -329,3 +329,60 @@ export interface Referral {
   status: 'pending' | 'rewarded';
   createdAt: string;
 }
+
+export interface RecurringSubscription {
+  id: string;
+  userId: string;
+  name: string;
+  amount: number;
+  billingCycle: 'monthly' | 'yearly';
+  billingDay: number; // 1-31
+  category: string;
+  paymentMethod?: string;
+  icon?: string;
+  isActive: boolean;
+  notes?: string;
+  createdAt: string;
+}
+
+export interface DebtItem {
+  id: string;
+  userId: string;
+  type: 'payable' | 'receivable'; // payable = hutang saya, receivable = orang lain hutang ke saya
+  personName: string;
+  amount: number;
+  paidAmount: number;
+  dueDate?: string; // YYYY-MM-DD
+  notes?: string;
+  status: 'unpaid' | 'partial' | 'settled';
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface PersonalReward {
+  id: string;
+  userId: string;
+  title: string;
+  costCoins: number;
+  icon: string;
+  description?: string;
+  isClaimed?: boolean;
+  claimedAt?: string;
+  createdAt: string;
+}
+
+export interface PomodoroLog {
+  id: string;
+  userId: string;
+  taskTitle: string;
+  durationMinutes: number;
+  type: 'focus' | 'short_break' | 'long_break';
+  completedAt: string;
+}
+
+export interface AISettings {
+  geminiApiKey: string;
+  isGeminiActive: boolean;
+  customCoachPersona?: string;
+}
+
