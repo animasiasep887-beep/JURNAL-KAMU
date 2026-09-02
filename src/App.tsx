@@ -85,10 +85,18 @@ const MainLayout: React.FC = () => {
   // Sub-tabs for clean, non-overwhelming navigation
   const [dashboardSubTab, setDashboardSubTab] = useState<'daily' | 'gamification' | 'timeline'>('daily');
   const [financeSubTab, setFinanceSubTab] = useState<'transactions' | 'subs' | 'budgets' | 'simulations'>('transactions');
+  const [telegramSubTab, setTelegramSubTab] = useState<'connect' | 'simulator'>('connect');
   const [gymSubTab, setGymSubTab] = useState<'logger' | 'charts' | 'database'>('logger');
   const [journalSubTab, setJournalSubTab] = useState<'editor' | 'activities'>('editor');
   const [tasksSubTab, setTasksSubTab] = useState<'list' | 'pomodoro'>('list');
   const [settingsSubTab, setSettingsSubTab] = useState<'profile' | 'membership' | 'backup'>('profile');
+
+  // Auto scroll to top on tab switch so users immediately see the top header & main action
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const mainEl = document.querySelector('main');
+    if (mainEl) mainEl.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [activeTab, telegramSubTab, financeSubTab, dashboardSubTab, gymSubTab, journalSubTab, tasksSubTab, settingsSubTab]);
 
   // Global Ctrl+K / Cmd+K listener
   React.useEffect(() => {
@@ -403,13 +411,43 @@ const MainLayout: React.FC = () => {
 
           {/* TAB 3: TELEGRAM BOT SIMULATOR */}
           {activeTab === 'telegram' && (
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2 order-2 lg:order-1">
-                <TelegramSimulator />
+            <div className="space-y-6">
+              <div className="flex bg-slate-900 p-1.5 rounded-2xl border border-slate-800 text-xs gap-1">
+                <button
+                  type="button"
+                  onClick={() => setTelegramSubTab('connect')}
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    telegramSubTab === 'connect'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  📱 Hubungkan Bot & Panduan Satset
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTelegramSubTab('simulator')}
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold transition-all text-center ${
+                    telegramSubTab === 'simulator'
+                      ? 'bg-indigo-600 text-white shadow-md'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  💬 Live Bot Chat Simulator
+                </button>
               </div>
-              <div className="order-1 lg:order-2">
-                <TelegramSettings />
-              </div>
+
+              {telegramSubTab === 'connect' && (
+                <div className="space-y-6 animate-fade-in">
+                  <TelegramSettings />
+                </div>
+              )}
+
+              {telegramSubTab === 'simulator' && (
+                <div className="space-y-6 animate-fade-in">
+                  <TelegramSimulator />
+                </div>
+              )}
             </div>
           )}
 
