@@ -62,6 +62,23 @@ export const PomodoroTimer: React.FC = () => {
     return () => clearInterval(timer);
   }, [isRunning, timeLeft]);
 
+  // Dynamic Browser Tab Title Effect
+  useEffect(() => {
+    if (isRunning) {
+      const mins = Math.floor(timeLeft / 60);
+      const secs = timeLeft % 60;
+      const timeFormatted = `${mins}:${secs.toString().padStart(2, '0')}`;
+      const modeLabel = mode === 'focus' ? 'Fokus Kerja' : 'Istirahat';
+      document.title = `⏱️ (${timeFormatted}) ${modeLabel} • Life OS`;
+    } else {
+      document.title = 'Personal Life OS & AI Partner';
+    }
+
+    return () => {
+      document.title = 'Personal Life OS & AI Partner';
+    };
+  }, [isRunning, timeLeft, mode]);
+
   // Handle session finished
   const handleSessionComplete = () => {
     try {

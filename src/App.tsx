@@ -70,6 +70,9 @@ import { CommandPalette } from './components/layout/CommandPalette';
 import { FloatingBotWidget } from './components/telegram/FloatingBotWidget';
 import { UserLevelCard } from './components/gamification/UserLevelCard';
 import { WeeklyLifeReview } from './components/gamification/WeeklyLifeReview';
+import { AudioDailyBriefingButton } from './components/dashboard/AudioDailyBriefingButton';
+import { SpendingAnomalyAlert } from './components/finance/SpendingAnomalyAlert';
+import { KeyboardShortcutsModal } from './components/common/KeyboardShortcutsModal';
 
 const MainLayout: React.FC = () => {
   const { currentUser, isAdmin } = useAuth();
@@ -81,6 +84,8 @@ const MainLayout: React.FC = () => {
   const [showCommandPalette, setShowCommandPalette] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedAdminUser, setSelectedAdminUser] = useState<User | null>(null);
+
+  const [showShortcuts, setShowShortcuts] = useState(false);
 
   // Sub-tabs for clean, non-overwhelming navigation
   const [dashboardSubTab, setDashboardSubTab] = useState<'daily' | 'gamification' | 'timeline'>('daily');
@@ -98,12 +103,46 @@ const MainLayout: React.FC = () => {
     if (mainEl) mainEl.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activeTab, telegramSubTab, financeSubTab, dashboardSubTab, gymSubTab, journalSubTab, tasksSubTab, settingsSubTab]);
 
-  // Global Ctrl+K / Cmd+K listener
+  // Global Keyboard Shortcuts (Ctrl+K, ?, J, T, G, P, Esc)
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      const activeTagName = (document.activeElement?.tagName || '').toLowerCase();
+      const isEditing = activeTagName === 'input' || activeTagName === 'textarea' || (document.activeElement as HTMLElement)?.isContentEditable;
+
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
         setShowCommandPalette((prev) => !prev);
+        return;
+      }
+
+      if (e.key === '?' && !isEditing) {
+        e.preventDefault();
+        setShowShortcuts((prev) => !prev);
+        return;
+      }
+
+      if (e.key === 'Escape') {
+        setShowShortcuts(false);
+        setShowCommandPalette(false);
+        setShowQuickAction(false);
+        return;
+      }
+
+      if (!isEditing && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        if (e.key.toLowerCase() === 'j') {
+          e.preventDefault();
+          setActiveTab('journal');
+        } else if (e.key.toLowerCase() === 't') {
+          e.preventDefault();
+          setShowQuickAction(true);
+        } else if (e.key.toLowerCase() === 'g') {
+          e.preventDefault();
+          setActiveTab('gym');
+        } else if (e.key.toLowerCase() === 'p') {
+          e.preventDefault();
+          setActiveTab('tasks');
+          setTasksSubTab('pomodoro');
+        }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -185,7 +224,9 @@ const MainLayout: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-2.5 self-start sm:self-auto">
+            <div className="flex flex-wrap items-center gap-2.5 self-start sm:self-auto">
+              <AudioDailyBriefingButton />
+              
               <button
                 onClick={() => setShowCommandPalette(true)}
                 className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-slate-800/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 rounded-xl text-xs font-semibold shadow-sm transition-all"
@@ -193,6 +234,15 @@ const MainLayout: React.FC = () => {
                 <span>Spotlight</span>
                 <span className="font-mono text-[10px] bg-slate-900 px-1.5 py-0.5 rounded border border-slate-700 text-indigo-400">Ctrl+K</span>
               </button>
+
+              <button
+                onClick={() => setShowShortcuts(true)}
+                title="Buka panduan shortcut keyboard"
+                className="hidden sm:flex items-center justify-center w-8 h-8 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white border border-slate-700 rounded-xl text-xs font-bold transition-colors"
+              >
+                ?
+              </button>
+
               <div className="px-3.5 py-2 bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/30 text-amber-300 rounded-2xl flex items-center gap-2 shadow-sm font-bold text-xs">
                 <Flame className="w-4 h-4 text-orange-400 fill-current animate-pulse" />
                 <span>{calculateJournalStreak(journals)} Hari Streak</span>
@@ -330,6 +380,8 @@ const MainLayout: React.FC = () => {
           {/* TAB 2: FINANCE */}
           {activeTab === 'finance' && (
             <div className="space-y-6">
+              <SpendingAnomalyAlert />
+
               {/* Finance Sub-Tabs Navigation Bar */}
               <div className="flex flex-wrap bg-slate-900 p-1.5 rounded-2xl border border-slate-800 text-xs gap-1">
                 <button
@@ -795,6 +847,9 @@ const MainLayout: React.FC = () => {
 
       {/* 🚫 Banned / Suspended Account Gate Screen */}
       <AccountBannedGateModal />
+
+      {/* ⌨️ Keyboard Shortcuts Cheat-Sheet Modal */}
+      <KeyboardShortcutsModal isOpen={showShortcuts} onClose={() => setShowShortcuts(false)} />
     </div>
   );
 };

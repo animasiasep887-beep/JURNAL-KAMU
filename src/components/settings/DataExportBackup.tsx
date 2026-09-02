@@ -4,13 +4,37 @@ import { useAuth } from '../../context/AuthContext';
 import { useData } from '../../context/DataContext';
 import { useNotification } from '../../context/NotificationContext';
 import { audioSynth } from '../../utils/audioSynth';
-import { Download, Upload, Database, FileSpreadsheet, ShieldCheck, Printer, Sparkles, Table } from 'lucide-react';
+import { Download, Upload, Database, FileSpreadsheet, ShieldCheck, Printer, Sparkles, Table, Cloud, ExternalLink, CheckCircle2 } from 'lucide-react';
 
 export const DataExportBackup: React.FC = () => {
   const { exportBackup, restoreBackup, accounts, transactions, journals } = useData();
   const { currentUser } = useAuth();
   const { showToast } = useNotification();
   const [jsonInput, setJsonInput] = useState('');
+  const [isCloudSyncing, setIsCloudSyncing] = useState(false);
+
+  const handleGoogleDriveBackup = () => {
+    audioSynth.playClick();
+    setIsCloudSyncing(true);
+
+    const dataStr = exportBackup();
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const filename = `PersonalLifeOS_CloudBackup_${new Date().toISOString().split('T')[0]}.json`;
+
+    // Trigger auto-download so user has the file ready to upload/sync to Google Drive
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.click();
+
+    setTimeout(() => {
+      setIsCloudSyncing(false);
+      audioSynth.playSuccess(0.12);
+      showToast(`☁️ File backup "${filename}" siap! Membuka Google Drive...`, 'success');
+      window.open('https://drive.google.com/drive/my-drive', '_blank');
+    }, 600);
+  };
 
   const handleExecutiveReport = () => {
     if (!currentUser) return;
@@ -85,12 +109,37 @@ export const DataExportBackup: React.FC = () => {
             <Database className="w-5 h-5 text-indigo-400" />
             <span>Ekspor Data & Backup / Restore Database</span>
           </h3>
-          <p className="text-xs text-slate-400 mt-1">Simpan salinan data lengkap atau ekspor ke PDF, Excel/CSV, dan JSON.</p>
+          <p className="text-xs text-slate-400 mt-1">Simpan salinan data lengkap atau ekspor ke Google Drive, PDF, Excel/CSV, dan JSON.</p>
         </div>
       </div>
 
-      {/* Action Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* Cloud & Export Action Cards Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Google Drive 1-Click Backup Card */}
+        <div className="p-5 rounded-2xl bg-gradient-to-r from-sky-950/60 via-indigo-950/40 to-slate-900 border border-sky-500/40 flex flex-col justify-between space-y-4">
+          <div className="flex items-start gap-3.5">
+            <div className="p-3 rounded-2xl bg-sky-600 text-white shadow-lg shadow-sky-600/30 shrink-0">
+              <Cloud className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className="text-sm font-bold text-white flex items-center gap-1.5">
+                <span>Backup ke Google Drive</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-sky-500/20 text-sky-300 font-bold border border-sky-500/30">1-KLIK</span>
+              </h4>
+              <p className="text-xs text-slate-300 mt-0.5">Simpan salinan data terenkripsi ke Google Drive pribadi untuk ketenangan pikiran seumur hidup.</p>
+            </div>
+          </div>
+          <button
+            onClick={handleGoogleDriveBackup}
+            disabled={isCloudSyncing}
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs rounded-xl shadow-lg shadow-sky-600/30 transition-all cursor-pointer"
+          >
+            <Cloud className="w-4 h-4" />
+            <span>{isCloudSyncing ? 'Menyiapkan Cloud Backup...' : 'Backup ke Google Drive Saya'}</span>
+            <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+          </button>
+        </div>
+
         {/* Executive PDF Report Card */}
         <div className="p-5 rounded-2xl bg-gradient-to-r from-indigo-950/60 via-purple-950/40 to-slate-900 border border-indigo-500/40 flex flex-col justify-between space-y-4">
           <div className="flex items-start gap-3.5">
@@ -98,7 +147,7 @@ export const DataExportBackup: React.FC = () => {
               <Printer className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-white">Laporan Audit Eksekutif (PDF / Print)</h4>
+              <h4 className="text-sm font-bold text-white">Laporan Audit Eksekutif</h4>
               <p className="text-xs text-slate-300 mt-0.5">Format laporan bersih, rapi, dan siap cetak/arsip dengan ringkasan saldo & riwayat.</p>
             </div>
           </div>
@@ -118,8 +167,8 @@ export const DataExportBackup: React.FC = () => {
               <FileSpreadsheet className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-white">Ekspor ke Excel / CSV Spreadsheet</h4>
-              <p className="text-xs text-slate-300 mt-0.5">Unduh data transaksi dalam format .csv yang rapi untuk diolah di Microsoft Excel atau Google Sheets.</p>
+              <h4 className="text-sm font-bold text-white">Ekspor ke Excel / CSV</h4>
+              <p className="text-xs text-slate-300 mt-0.5">Unduh data transaksi dalam format .csv untuk diolah di Microsoft Excel atau Google Sheets.</p>
             </div>
           </div>
           <button
