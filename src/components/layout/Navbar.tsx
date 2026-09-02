@@ -62,9 +62,11 @@ export const Navbar: React.FC<NavbarProps> = ({
         onClick={() => setActiveTab('dashboard')}
         className="lg:hidden flex items-center gap-2 cursor-pointer shrink-0"
       >
-        <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center text-white shadow-md">
-          <Sparkles className="w-4 h-4" />
-        </div>
+        <img
+          src="/logo.png"
+          alt="Life OS Logo"
+          className="w-8 h-8 rounded-xl object-cover shadow-md shadow-indigo-600/30 ring-1 ring-indigo-500/30"
+        />
         <span className="hidden xs:inline font-extrabold text-xs text-white">Life OS</span>
       </div>
 

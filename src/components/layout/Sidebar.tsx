@@ -73,11 +73,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
       {/* Brand Header */}
       <div className="h-16 px-5 flex items-center justify-between border-b border-slate-800/80 bg-slate-900/40">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-indigo-600 via-violet-600 to-amber-500 flex items-center justify-center text-white shadow-lg shadow-indigo-600/30 p-0.5">
-            <div className="w-full h-full bg-slate-950/60 rounded-[14px] flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-amber-300" />
-            </div>
-          </div>
+          <img
+            src="/logo.png"
+            alt="Personal Life OS Logo"
+            className="w-9 h-9 rounded-2xl object-cover shadow-lg shadow-indigo-600/40 ring-1 ring-indigo-500/30 shrink-0"
+          />
           <div>
             <h1 className="font-black text-sm text-white tracking-tight flex items-center gap-1.5">
               Personal Life OS

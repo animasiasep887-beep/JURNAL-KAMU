@@ -76,11 +76,11 @@ export const PWAInstallPromptModal: React.FC<PWAInstallPromptModalProps> = ({ is
           </button>
 
           <div className="flex items-start gap-4">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-amber-500 p-0.5 shadow-xl shadow-indigo-600/30 shrink-0 flex items-center justify-center">
-              <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-                <Sparkles className="w-8 h-8 text-amber-300 animate-pulse" />
-              </div>
-            </div>
+            <img
+              src="/logo.png"
+              alt="Personal Life OS App Logo"
+              className="w-16 h-16 rounded-2xl object-cover shadow-xl shadow-indigo-600/40 ring-1 ring-white/20 shrink-0"
+            />
 
             <div className="space-y-1">
               <div className="flex items-center gap-2">

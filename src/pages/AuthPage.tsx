@@ -77,9 +77,11 @@ export const AuthPage: React.FC = () => {
       <header className="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 py-3.5 sm:py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2.5 sm:gap-3">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-amber-500 flex items-center justify-center shadow-lg shadow-indigo-600/30 ring-1 ring-white/20">
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-white animate-pulse" />
-            </div>
+            <img
+              src="/logo.png"
+              alt="Jurnal Kamu Logo"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl object-cover shadow-lg shadow-indigo-600/40 ring-1 ring-white/20 shrink-0"
+            />
             <div>
               <span className="text-base sm:text-lg font-black tracking-tight text-white flex items-center gap-1 font-mono">
                 JURNALKAMU<span className="text-indigo-400">.COM</span>
