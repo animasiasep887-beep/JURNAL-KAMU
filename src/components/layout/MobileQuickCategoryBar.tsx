@@ -16,12 +16,14 @@ interface MobileQuickCategoryBarProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   journalStreak: number;
+  onOpenInstallModal?: () => void;
 }
 
 export const MobileQuickCategoryBar: React.FC<MobileQuickCategoryBarProps> = ({
   activeTab,
   setActiveTab,
   journalStreak,
+  onOpenInstallModal,
 }) => {
   const quickPills = [
     { id: 'dashboard', label: 'Ringkasan', icon: LayoutDashboard, color: 'text-indigo-400' },
@@ -38,6 +40,16 @@ export const MobileQuickCategoryBar: React.FC<MobileQuickCategoryBarProps> = ({
   return (
     <div className="lg:hidden w-full overflow-x-auto no-scrollbar py-1">
       <div className="flex items-center gap-2 px-1 min-w-max">
+        {onOpenInstallModal && (
+          <button
+            type="button"
+            onClick={onOpenInstallModal}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black bg-gradient-to-r from-sky-500/20 to-indigo-500/20 text-sky-300 border border-sky-500/40 shadow-sm shrink-0 animate-pulse"
+          >
+            <span>📲 Install App</span>
+          </button>
+        )}
+
         {quickPills.map((pill) => {
           const Icon = pill.icon;
           const isActive = activeTab === pill.id;

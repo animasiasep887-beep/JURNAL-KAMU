@@ -1,12 +1,16 @@
 {
   "name": "Personal Life OS & AI Partner",
   "short_name": "LifeOS",
+  "id": "com.jurnalkamu.lifeos",
   "description": "Executive Personal Operating System for Financials, Mental Health Journaling, Fitness & Multimodal AI Bot.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#020617",
   "theme_color": "#4f46e5",
+  "categories": ["productivity", "finance", "lifestyle", "health"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/pwa-192.png",
@@ -19,6 +23,26 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Catat Keuangan",
+      "short_name": "Keuangan",
+      "description": "Catat pemasukan atau pengeluaran baru",
+      "url": "/?tab=finance"
+    },
+    {
+      "name": "Tulis Jurnal",
+      "short_name": "Jurnal",
+      "description": "Tulis refleksi harian & mood",
+      "url": "/?tab=journal"
+    },
+    {
+      "name": "Latihan Gym",
+      "short_name": "Gym",
+      "description": "Catat set latihan dan beban gym",
+      "url": "/?tab=gym"
     }
   ]
 }

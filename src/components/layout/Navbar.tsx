@@ -17,6 +17,8 @@ import {
   Sparkles,
   Volume2,
   VolumeX,
+  Smartphone,
+  Download,
 } from 'lucide-react';
 import { INITIAL_MEMBERSHIP_PLANS } from '../../utils/initialData';
 import { audioSynth } from '../../utils/audioSynth';
@@ -25,6 +27,7 @@ interface NavbarProps {
   onOpenQuickAction: () => void;
   onOpenNotifications: () => void;
   onSearchSubmit: (query: string) => void;
+  onOpenInstallModal?: () => void;
   activeTab: string;
   setActiveTab: (tab: string) => void;
 }
@@ -33,6 +36,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenQuickAction,
   onOpenNotifications,
   onSearchSubmit,
+  onOpenInstallModal,
   activeTab,
   setActiveTab,
 }) => {
@@ -82,6 +86,18 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Right Controls */}
       <div className="flex items-center gap-2 md:gap-3">
+        {/* Install / Download App Button */}
+        {onOpenInstallModal && (
+          <button
+            onClick={onOpenInstallModal}
+            title="Download & Install Aplikasi ke HP / Desktop"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-800/90 hover:bg-slate-800 text-sky-300 hover:text-sky-200 border border-sky-500/30 rounded-xl text-xs font-bold shadow-md shadow-sky-950/30 transition-all cursor-pointer"
+          >
+            <Smartphone className="w-3.5 h-3.5 text-sky-400" />
+            <span className="hidden sm:inline">Install App</span>
+          </button>
+        )}
+
         {/* Quick Action (+) Button - VVIP Pulsating Shimmer */}
         <button
           onClick={onOpenQuickAction}

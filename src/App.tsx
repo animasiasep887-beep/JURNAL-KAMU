@@ -73,6 +73,7 @@ import { WeeklyLifeReview } from './components/gamification/WeeklyLifeReview';
 import { AudioDailyBriefingButton } from './components/dashboard/AudioDailyBriefingButton';
 import { SpendingAnomalyAlert } from './components/finance/SpendingAnomalyAlert';
 import { KeyboardShortcutsModal } from './components/common/KeyboardShortcutsModal';
+import { PWAInstallPromptModal } from './components/common/PWAInstallPromptModal';
 
 const MainLayout: React.FC = () => {
   const { currentUser, isAdmin } = useAuth();
@@ -86,6 +87,7 @@ const MainLayout: React.FC = () => {
   const [selectedAdminUser, setSelectedAdminUser] = useState<User | null>(null);
 
   const [showShortcuts, setShowShortcuts] = useState(false);
+  const [showInstallModal, setShowInstallModal] = useState(false);
 
   // Sub-tabs for clean, non-overwhelming navigation
   const [dashboardSubTab, setDashboardSubTab] = useState<'daily' | 'gamification' | 'timeline'>('daily');
@@ -125,6 +127,7 @@ const MainLayout: React.FC = () => {
         setShowShortcuts(false);
         setShowCommandPalette(false);
         setShowQuickAction(false);
+        setShowInstallModal(false);
         return;
       }
 
@@ -161,6 +164,7 @@ const MainLayout: React.FC = () => {
             setSearchQuery(q);
             setShowCommandPalette(true);
           }}
+          onOpenInstallModal={() => setShowInstallModal(true)}
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         />
@@ -171,6 +175,7 @@ const MainLayout: React.FC = () => {
             activeTab={activeTab}
             setActiveTab={setActiveTab}
             journalStreak={calculateJournalStreak(journals)}
+            onOpenInstallModal={() => setShowInstallModal(true)}
           />
 
           {/* ⏳ Free Trial 7 Hari Status Banner & Peringatan */}
@@ -850,6 +855,9 @@ const MainLayout: React.FC = () => {
 
       {/* ⌨️ Keyboard Shortcuts Cheat-Sheet Modal */}
       <KeyboardShortcutsModal isOpen={showShortcuts} onClose={() => setShowShortcuts(false)} />
+
+      {/* 📲 PWA App Store / Play Store Install Modal */}
+      <PWAInstallPromptModal isOpen={showInstallModal} onClose={() => setShowInstallModal(false)} />
     </div>
   );
 };
