@@ -103,7 +103,7 @@ export const FloatingBotWidget: React.FC = () => {
               <span>Voice Note & OCR Ready</span>
             </span>
             <a
-              href={`https://t.me/PersonalLifeOSBot?start=${userCode}`}
+              href={`https://t.me/Asisten_Jurnal_Kamu_bot?start=${userCode}`}
               target="_blank"
               rel="noreferrer"
               className="text-sky-400 hover:text-sky-300 hover:underline flex items-center gap-1 font-medium"

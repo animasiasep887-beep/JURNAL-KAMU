@@ -35,7 +35,7 @@ export const TelegramSettings: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'mobile' | 'desktop'>('mobile');
   const [copiedText, setCopiedText] = useState<string | null>(null);
 
-  const botUsername = 'PersonalLifeOSBot';
+  const botUsername = 'Asisten_Jurnal_Kamu_bot';
   const deepLinkUrl = `https://t.me/${botUsername}?start=${telegram.connectionCode}`;
   const isConnected = telegram.status === 'connected';
 
@@ -131,7 +131,7 @@ export const TelegramSettings: React.FC = () => {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h4 className="text-sm font-bold text-white">Official Personal Life OS Bot</h4>
+                <h4 className="text-sm font-bold text-white">Asisten Jurnal Kamu Bot</h4>
                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/30 text-indigo-300 font-bold flex items-center gap-1 border border-indigo-500/40">
                   <Sparkles className="w-3 h-3 text-amber-400" /> Gemini AI
                 </span>
