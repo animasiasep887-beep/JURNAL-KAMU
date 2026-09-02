@@ -64,7 +64,7 @@ export const TrialExpiredGateModal: React.FC = () => {
     const selected = plans.find((p) => p.id === planId) || plans[2];
     const message = `Halo Admin Personal Life OS! 🌟\n\nSaya ingin aktivasi membership:\n\n👤 *Nama:* ${currentUser.name}\n🔑 *Username:* @${currentUser.username}\n🆔 *User ID:* ${currentUser.id}\n📧 *Email:* ${currentUser.email}\n💎 *Paket Pilihan:* ${selected.name} (${selected.price} ${selected.period})\n\nMohon info rekening Bank Transfer / QRIS / E-Wallet untuk aktivasi instan. Terima kasih! 🙏`;
     const encoded = encodeURIComponent(message);
-    const waUrl = `https://wa.me/6281234567890?text=${encoded}`;
+    const waUrl = `https://wa.me/6285869299537?text=${encoded}`;
     window.open(waUrl, '_blank');
   };
 

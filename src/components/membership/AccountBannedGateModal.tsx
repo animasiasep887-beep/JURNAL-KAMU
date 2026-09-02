@@ -17,7 +17,7 @@ export const AccountBannedGateModal: React.FC = () => {
     const reason = isBanned ? 'banned' : 'dinonaktifkan';
     const message = `Halo Admin Personal Life OS,\n\nAkun saya terdeteksi status: ${reason.toUpperCase()}.\n\n👤 Nama: ${currentUser.name}\n🔑 Username: @${currentUser.username}\n🆔 ID: ${currentUser.id}\n📧 Email: ${currentUser.email}\n\nMohon bantuannya untuk verifikasi/pengaktifan kembali. Terima kasih!`;
     const encoded = encodeURIComponent(message);
-    const waUrl = `https://wa.me/6281234567890?text=${encoded}`;
+    const waUrl = `https://wa.me/6285869299537?text=${encoded}`;
     window.open(waUrl, '_blank');
   };
 

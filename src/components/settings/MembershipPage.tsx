@@ -13,7 +13,7 @@ export const MembershipPage: React.FC = () => {
   const handleWhatsAppChat = (plan: typeof INITIAL_MEMBERSHIP_PLANS[0]) => {
     const message = `Halo Admin Personal Life OS! 🌟\n\nSaya ingin aktivasi / perpanjang paket membership.\n\n👤 *Nama:* ${currentUser.name}\n🔑 *Username:* @${currentUser.username}\n📧 *Email:* ${currentUser.email}\n💎 *Paket Pilihan:* ${plan.name} (${plan.priceFormatted})\n\nMohon rekening / QRIS untuk pembayarannya. Terima kasih! 🙏`;
     const encoded = encodeURIComponent(message);
-    const waUrl = `https://wa.me/6281234567890?text=${encoded}`;
+    const waUrl = `https://wa.me/6285869299537?text=${encoded}`;
     window.open(waUrl, '_blank');
   };
 

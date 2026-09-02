@@ -51,7 +51,7 @@ export const INITIAL_USERS: User[] = [
     name: 'Admin System',
     username: 'admin',
     email: 'admin@lifeos.com',
-    whatsapp: '+628999888777',
+    whatsapp: '+6285869299537',
     role: 'super_admin',
     status: 'active',
     avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80',

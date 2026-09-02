@@ -24,7 +24,7 @@ export const TrialStatusBanner: React.FC<TrialStatusBannerProps> = ({ onOpenMemb
   const handleWhatsAppChat = () => {
     const message = `Halo Admin Personal Life OS, masa trial akun saya tersisa ${daysLeft} hari.\n\nSaya ingin aktivasi membership:\nUsername: @${currentUser.username}\nEmail: ${currentUser.email}`;
     const encoded = encodeURIComponent(message);
-    const waUrl = `https://wa.me/6281234567890?text=${encoded}`;
+    const waUrl = `https://wa.me/6285869299537?text=${encoded}`;
     window.open(waUrl, '_blank');
   };
 
